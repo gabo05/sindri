@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  logo: MyString
+  color1: MyString
+  color2: MyString
+  color3: MyString
+  state: false
+
+two:
+  name: MyString
+  logo: MyString
+  color1: MyString
+  color2: MyString
+  color3: MyString
+  state: false

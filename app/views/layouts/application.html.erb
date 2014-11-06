@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Sindri - Helpdesk</title>
+	  <%= stylesheet_link_tag    "bootstrap.min", :media => "all" %>
+	  <%= stylesheet_link_tag    "bootstrap-theme.min", :media => "all" %>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<%= image_tag "logo.png", :alt => "", :title => "Tickets"%>
+						<h1>Brokkeneitri</h1>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<nav class="navbar pull-right" role="navigation">
+                            <div class="container-fluid">
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav sindri-user">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gabriel <span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#"><i class="glyphicon glyphicon-user"></i>Perfil</a></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-pencil"></i>Cambiar Contrase&ntilde;a</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#"><i class="glyphicon glyphicon-off"></i>Cerrrar Sesi&oacute;n</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+					</div>
+				</div>
+			</header>
+			<nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sindri-nav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Sindri</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="sindri-nav">
+                        <ul class="nav navbar-nav">
+                            <li><%= link_to "Inicio", controller: "home", action: "index"%></li>
+                            <li><%= link_to "Tickets", controller: "ticket", action: "index"%></li>
+                            <li><%= link_to "Planificacion", controller: "scheldule", action: "index"%></li>
+                            <li><%= link_to "Agentes", controller: "agent", action: "index"%></li>
+                            <li><%= link_to "Clientes", controller: "client", action: "index"%></li>
+                            <li><%= link_to "Base de Conocimientos", controller: "solution", action: "index"%></li>
+                            <li><%= link_to "Reportes", controller: "report", action: "index"%></li>
+                            <li><%= link_to "Configuración", controller: "setting", action: "index"%></li>
+                            <li><%= link_to "Acerca de...", controller: "home", action: "about"%></li>
+                        </ul>
+                    </div>
+                </div>
+			</nav>
+			<%= yield %>
+		</div>
+		<%= javascript_include_tag "bootstrap.min" %>
+		<%= javascript_include_tag "application" %>
+	</body>
+</html>

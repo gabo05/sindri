@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: 1
+  schedule: 
+  name: MyString
+  description: MyText
+  start_at: 2014-11-06 01:21:29
+  end_at: 2014-11-06 01:21:29
+  predecessor: 1
+  completed: false
+  state: false
+
+two:
+  number: 1
+  schedule: 
+  name: MyString
+  description: MyText
+  start_at: 2014-11-06 01:21:29
+  end_at: 2014-11-06 01:21:29
+  predecessor: 1
+  completed: false
+  state: false

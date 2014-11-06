@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  business: 
+  appointment: 
+  first_name: MyString
+  last_name: MyString
+  state: false
+
+two:
+  business: 
+  appointment: 
+  first_name: MyString
+  last_name: MyString
+  state: false

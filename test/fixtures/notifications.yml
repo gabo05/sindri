@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ticket: 
+  agent: 
+  subject: MyString
+  description: MyText
+  state: false
+
+two:
+  ticket: 
+  agent: 
+  subject: MyString
+  description: MyText
+  state: false

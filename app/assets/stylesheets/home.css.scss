@@ -1,0 +1,23 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.center{
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sindri-menu-home{
+    text-align: center;
+    margin-right: 8.33334%;
+    margin-left: 8.33334%;
+}
+.sindri-menu-home img{
+    max-width: 100%;
+}
+.sindri-mh-item{
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 1.7em;
+}

@@ -21,6 +21,12 @@ Sindri::Application.routes.draw do
   get "home/about"
 
   post "login/signin"
+    
+  post "ticket/create"
+    
+  post "agent/create"
+  
+  post "client/create"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

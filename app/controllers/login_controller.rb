@@ -1,4 +1,4 @@
-class LoginController < ApplicationController
+class LoginController < ActionController::Base
     layout "unsignup"
     
     def login

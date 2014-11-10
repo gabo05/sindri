@@ -2,28 +2,27 @@
     <div class="center col-lg-10 col-md-10 col-sm-10 col-xs-12">
         <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
             <%= image_tag "tickets.png", :alt => "", :title => "Tickets"%>
-            <a class="sindri-mh-item">Tickets</a>
-            
+            <%= link_to "Tickets", { controller: "ticket", action: "index" }, class: "sindri-mh-item" %>
         </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <div class="sindri-menu-home col-lg-2 col-lg-offset-3 col-md-3 col-sm-6 col-xs-12">
             <%= image_tag "planificacion.png", :alt => "", :title => "Tickets"%>
-            <a class="sindri-mh-item">Planificaci&oacute;n</a>
+            <%= link_to "Planificacion", { controller: "scheldule", action: "index" }, class: "sindri-mh-item" %>
         </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <div class="sindri-menu-home col-lg-2 col-lg-offset-3 col-md-3 col-sm-6 col-xs-12">
             <%= image_tag "conocimiento.png", :alt => "", :title => "Tickets"%>
-            <a class="sindri-mh-item">Base de Conocimientos</a>
+            <%= link_to "Base de Conocimientos", { controller: "solution", action: "index" }, class: "sindri-mh-item" %>
         </div>
         <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
             <%= image_tag "reporte.png", :alt => "", :title => "Tickets"%>
-            <a class="sindri-mh-item">Reportes</a>
+            <%= link_to "Reportes", { controller: "report", action: "index" }, class: "sindri-mh-item" %>
         </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <div class="sindri-menu-home col-lg-2 col-lg-offset-3 col-md-3 col-sm-6 col-xs-12">
             <%= image_tag "configuracion.png", :alt => "", :title => "Tickets"%>
-            <a class="sindri-mh-item">Configuraci&oacute;n</a>
+            <%= link_to "Configuración", { controller: "setting", action: "index" }, class: "sindri-mh-item" %>
         </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <div class="sindri-menu-home col-lg-2 col-lg-offset-3 col-md-3 col-sm-6 col-xs-12">
             <%= image_tag "acercade.png", :alt => "", :title => "Tickets"%>
-            <a class="sindri-mh-item">Acerca de...</a>
+            <%= link_to "Acerca de...", { controller: "home", action: "about" }, class: "sindri-mh-item" %>
         </div>
     </div>
 </div>

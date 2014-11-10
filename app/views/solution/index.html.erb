@@ -1,2 +1,22 @@
-<h1>Solution#index</h1>
-<p>Find me in app/views/solution/index.html.erb</p>
+<section class="center col-lg-8 col-md-8 col-sm-12 col-xs-12">
+    <h1>Base de Conocimientos</h1>
+    <%= form_for :solution, :url => {:action => "search", :controller => "solution"}, :html => {:class=>'form-horizontal', :role=>'form'} do |f| %>    
+        <div class = "input-group" > 
+            <%= f.text_field :solution, :class=>'form-control', :placeholder => 'Escriba aquí su búsqueda' %>
+            <div class = "input-group-btn"> 
+                <%= f.submit :class => 'btn btn-primary', :value => 'Buscar' %>
+            </div>    
+        </div>
+    <%end%>
+    <nav>
+        <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </nav>
+</section>

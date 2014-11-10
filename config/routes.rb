@@ -1,10 +1,20 @@
 Sindri::Application.routes.draw do
   
+  post "business/update"
+    
+  post "setting/update"
+    
+  post "login/update"
+
   get "setting/index"
 
   get "report/index"
 
   get "solution/index"
+    
+  post "solution/search"
+    
+  get "solution/solution"
 
   get "client/index"
 

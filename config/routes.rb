@@ -4,7 +4,9 @@ Sindri::Application.routes.draw do
     
   post "setting/update"
     
-  post "login/update"
+  get "account/register"
+    
+  post "account/create"
 
   get "setting/index"
 
@@ -24,13 +26,13 @@ Sindri::Application.routes.draw do
 
   get "ticket/index"
 
-  get "login/login"
+  get "account/login"
 
   get "home/index"
     
   get "home/about"
 
-  post "login/signin"
+  post "account/signin"
     
   post "ticket/create"
     

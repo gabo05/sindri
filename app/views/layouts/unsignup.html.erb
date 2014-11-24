@@ -2,10 +2,11 @@
 <html>
 	<head>
 	  <title>Sindri - Helpdesk</title>
-	  <%= stylesheet_link_tag    "bootstrap.min", :media => "all" %>
-	  <%= stylesheet_link_tag    "bootstrap-theme.min", :media => "all" %>
-	  <%= stylesheet_link_tag    "unsignup", :media => "all" %>
-	  <%= csrf_meta_tags %>
+        <%= favicon_link_tag 'favicon.png' %>
+        <%= stylesheet_link_tag    "bootstrap.min", :media => "all" %>
+        <%= stylesheet_link_tag    "bootstrap-theme.min", :media => "all" %>
+        <%= stylesheet_link_tag    "unsignup", :media => "all" %>
+        <%= csrf_meta_tags %>
 	</head>
 	<body>
 		<div class="container">
@@ -15,6 +16,7 @@
             </div>
 			<%= yield %>
 		</div>
+		<%= javascript_include_tag "jquery.min" %>
 		<%= javascript_include_tag "bootstrap.min" %>
 		<%= javascript_include_tag "application" %>
 	</body>

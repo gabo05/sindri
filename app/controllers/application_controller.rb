@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     private
         def signed_user
             if session[:user] == nil
-                redirect_to action: 'login', controller: 'login'
+                redirect_to action: 'login', controller: 'account'
             end
         end
 end

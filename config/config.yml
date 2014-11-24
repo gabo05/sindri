@@ -1,0 +1,4 @@
+development:
+    encrypt_password: #05B431
+test:
+    encrypt_password: #05B431

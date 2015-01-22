@@ -1,7 +1,6 @@
 class Account < ActiveRecord::Base
     belongs_to :email
     attr_accessible :picture, :state, :passsword
-
     before_save :set_defaults
 
     def full_name

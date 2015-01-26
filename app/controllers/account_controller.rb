@@ -1,11 +1,16 @@
-
 class AccountController < ActionController::Base
+    protect_from_forgery
     layout "unsignup"
     include AccountHelper
     
     def login
     end
     
+    def logout
+        user_logout
+        redirect_to url_for(:controller => :account, :action => :login)
+    end
+
     def register
     end
     

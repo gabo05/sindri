@@ -1,13 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  client: 
-  agent: 
+  client_id: 
+  agent_id: 
   email: MyString
   state: false
 
 two:
-  client: 
-  agent: 
+  client_id: 
+  agent_id: 
   email: MyString
   state: false

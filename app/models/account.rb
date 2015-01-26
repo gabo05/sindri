@@ -1,6 +1,5 @@
 class Account < ActiveRecord::Base
     belongs_to :email
-    attr_accessible :picture, :state, :passsword
     before_save :set_defaults
 
     def full_name
@@ -8,11 +7,11 @@ class Account < ActiveRecord::Base
     end
 
     def is_agent?
-    	@email.agents_id != nil
+    	self.email.agent.id != nil
     end
 
     def is_client?
-    	@email.clients_id != nil
+    	self.email.client.id != nil
     end
 
     def type

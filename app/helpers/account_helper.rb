@@ -28,10 +28,10 @@ module AccountHelper
 	def user_signin(email, password)
 		if(email != nil)
 			email_account = Email.find_by email: 'san.gaby@hotmail.es'
-            user = Account.find_by password: AESCrypt.decrypt(params[:password], MY_CONFIG['encrypt_password'])
+            user = Account.find_by passsword: AESCrypt.encrypt(password, MY_CONFIG['encrypt_password'])
 
-            if user!=nil && user.email_account.id == email_account.id
-                id = user.is_agent ? email.agents_id : email.clients_id
+            if user!=nil && user.email.id == email_account.id && user.confirmed
+                id = user.is_agent? ? user.email.agent.id : user.email.client.id
                 session[:user] = {'full_name' => user.full_name, 'user_id' => user.id, 'type' => user.type}
                 return 'success'
             else
@@ -41,4 +41,7 @@ module AccountHelper
             return 'noemail'
         end
 	end
+    def user_logout()
+        session[:user] = nil;
+    end
 end

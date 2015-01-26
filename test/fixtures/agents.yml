@@ -1,13 +1,13 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  appointment: 
+  appointment_id: 
   first_name: MyString
   last_name: MyString
   state: false
 
 two:
-  appointment: 
+  appointment_id: 
   first_name: MyString
   last_name: MyString
   state: false

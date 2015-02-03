@@ -10,8 +10,14 @@ class AccountController < ActionController::Base
         user_logout
         redirect_to url_for(:controller => :account, :action => :login)
     end
-
+    
     def register
+    end
+
+    def confirm
+        user_register id
+        
+        redirect_to url_for(:controller => :agent, :action => :edit, :id => id)
     end
     
     def create

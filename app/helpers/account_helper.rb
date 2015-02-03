@@ -18,7 +18,7 @@ module AccountHelper
                 user.email = email
                 user.passsword = AESCrypt.encrypt password, MY_CONFIG['encrypt_password']
                 if user.save
-                    AccountMailer::confirm_account user, email.email
+                    AccountMailer.confirm_account(user, email.email).deliver
                     return true
                 end
             end
@@ -30,7 +30,7 @@ module AccountHelper
 			email_account = Email.find_by email: 'san.gaby@hotmail.es'
             user = Account.find_by passsword: AESCrypt.encrypt(password, MY_CONFIG['encrypt_password'])
 
-            if user!=nil && user.email.id == email_account.id && user.confirmed
+            if user!=nil && user.email.id == email_account.id && user.confirmed == true
                 id = user.is_agent? ? user.email.agent.id : user.email.client.id
                 session[:user] = {'full_name' => user.full_name, 'user_id' => user.id, 'type' => user.type}
                 return 'success'
@@ -43,5 +43,11 @@ module AccountHelper
 	end
     def user_logout()
         session[:user] = nil;
+    end
+    def user_confirm(user_id)
+        user = find_by id: user_id
+        user.confirmed = true
+        user.save
+        session[:user] = {'full_name' => user.full_name, 'user_id' => user.id, 'type' => user.type}
     end
 end

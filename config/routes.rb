@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   #Account Controller Routes
   #GET
+  get "account/confirm/:id"
+
   get "account/register"
 
   get "account/login"
@@ -16,6 +18,8 @@ Rails.application.routes.draw do
   #Agent Controller Routes
   #GET
   get "agent/index"
+
+  get "agent/edit"
 
   #POST
   post "agent/create"

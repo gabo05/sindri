@@ -9,8 +9,16 @@ Rails.application.config.assets.version = '1.0'
 #css
 Rails.application.config.assets.precompile += %w( bootstrap.min.css )
 Rails.application.config.assets.precompile += %w( bootstrap-theme.min.css )
+Rails.application.config.assets.precompile += %w( bootstrap-switch.min.css )
 Rails.application.config.assets.precompile += %w( unsignup.css )
+Rails.application.config.assets.precompile += %w( scheldule.css )
+Rails.application.config.assets.precompile += %w( gantt.css )
 
 #js
 Rails.application.config.assets.precompile += %w( jquery.min.js )
 Rails.application.config.assets.precompile += %w( bootstrap.min.js )
+Rails.application.config.assets.precompile += %w( bootstrap-switch.min.js )
+Rails.application.config.assets.precompile += %w( agent.js )
+Rails.application.config.assets.precompile += %w( jquery.fn.gantt.js )
+Rails.application.config.assets.precompile += %w( scheldule.js )
+Rails.application.config.assets.precompile += %w( setting.js )

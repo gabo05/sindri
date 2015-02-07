@@ -1,10 +1,14 @@
 module AgentHelper
-	def invite_agent(name, user_email)
+    def asset_url asset
+      "#{request.protocol}#{request.host_with_port}/images/#{asset}"
+    end
+	def invite_agent(first_name, last_name, user_email)
 		#Initialize models
         #Create agent
-        agent = Agent.new   
-        agent.first_name = name
-
+        agent = Agent.new
+        agent.first_name = first_name
+        agent.last_name = last_name
+        
         #Create email
         if agent.save
             email = Email.new
@@ -17,12 +21,16 @@ module AgentHelper
                 user.email = email
                 password = 'Sindri01'
                 user.passsword = AESCrypt.encrypt password, MY_CONFIG['encrypt_password']
+                user.picture = 'avatar_default.png'
                 if user.save
-                    AgentMailer::send_agent_invitation email.email, user
+                    AgentMailer::agent_invitation(email.email, user).deliver
                     return true
                 end
             end
         end
         return false
 	end
+    def get_agents
+        return Agent.find_all
+    end
 end

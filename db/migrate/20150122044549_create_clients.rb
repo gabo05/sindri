@@ -6,6 +6,7 @@ class CreateClients < ActiveRecord::Migration
         t.references :appointment, index: true
         t.string :first_name
         t.string :last_name
+        t.string :phone_number
         t.boolean :state
 
         t.timestamps

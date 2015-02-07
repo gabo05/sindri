@@ -3,7 +3,14 @@ class Account < ActiveRecord::Base
     before_save :set_defaults
 
     def full_name
-    	return "#{@first_name} #{@last_name}"
+        if is_agent?
+    	   return self.email.agent.full_name
+        else
+            return "WTF!"
+        end
+        if is_client
+            return self.email.client.full_name
+        end
     end
 
     def is_agent?

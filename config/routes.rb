@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   #Account Controller Routes
   #GET
-  get "account/confirm/:id"
+  get "account/confirm/:id", to: "account#confirm"
 
   get "account/register"
 
@@ -19,10 +19,16 @@ Rails.application.routes.draw do
   #GET
   get "agent/index"
 
-  get "agent/edit"
+  get "agent/index/:page", to: "agent#index"
+  
+  get "agent/edit/:id", to: "agent#edit"
+
+  get "agent/delete/:id", to: "agent#delete"
 
   #POST
-  post "agent/create"
+  post "agent/invite"
+
+  post "agent/save"
 
   #Bussines Controller Routes
   #GET
@@ -34,12 +40,22 @@ Rails.application.routes.draw do
   #GET
   get "client/index"
 
+  get "client/index/:page", to: "agent#index"
+  
+  get "client/edit/:id", to: "agent#edit"
+
+  get "client/delete/:id", to: "agent#delete"
+
   #POST
-  post "client/create"
+  post "client/invite"
+
+  post "client/save"
 
   #Home Controller Routes
   #GET
   get "home/index"
+
+  get "home/index/:id", to: "home#index"
     
   get "home/about"
 

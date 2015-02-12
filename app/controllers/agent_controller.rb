@@ -35,8 +35,9 @@ class AgentController < ApplicationController
         
         agent.first_name = params[:first_name]
         agent.last_name = params[:last_name]
-
-        email = Email.where 'agent_id = ? and state = (1)::bit(1)', agent.id
+        agent.save
+        
+        email = Email.where 'agent_id = ? and state = true', agent.id
         account = Account.find_by email_id: email.id
 
         if email.email != params[:email] && params[:email] != "" && params[:email] != nil

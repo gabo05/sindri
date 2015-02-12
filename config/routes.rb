@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   #Bussines Controller Routes
   #GET
-
+  get "business/index"
   #POST
   post "business/update"
     
@@ -40,11 +40,11 @@ Rails.application.routes.draw do
   #GET
   get "client/index"
 
-  get "client/index/:page", to: "agent#index"
+  get "client/index/:page", to: "client#index"
   
-  get "client/edit/:id", to: "agent#edit"
+  get "client/edit/:id", to: "client#edit"
 
-  get "client/delete/:id", to: "agent#delete"
+  get "client/delete/:id", to: "client#delete"
 
   #POST
   post "client/invite"

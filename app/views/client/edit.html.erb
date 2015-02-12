@@ -1,6 +1,6 @@
 <section class="center col-lg-8 col-md-8 col-sm-12 col-xs-12">
     <%= render :partial => "shared/message" %>
-	<%= form_tag  url_for(:controller => :agent, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
+	<%= form_tag  url_for(:controller => :client, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
         <fieldset>
             <legend>Editar Perfil</legend>
             <div>
@@ -13,13 +13,13 @@
     		<div class="form-group">
                 <label for="first_name" class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
-                    <%= text_field_tag 'first_name', @agent.first_name, class: 'form-control', placeholder: 'Nombre' %>
+                    <%= text_field_tag 'first_name', @client.first_name, class: 'form-control', placeholder: 'Nombre' %>
                 </div>
             </div>
             <div class="form-group">
                 <label for="first_name" class="col-sm-2 control-label">Apellido</label>
                 <div class="col-sm-10">
-                    <%= text_field_tag 'last_name', @agent.last_name, class: 'form-control', placeholder: 'Apellido' %>
+                    <%= text_field_tag 'last_name', @client.last_name, class: 'form-control', placeholder: 'Apellido' %>
                 </div>
             </div>
             <div class="form-group">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div id="hidden_fields">
-                <%= hidden_field_tag 'agent_id', @agent.id %>
+                <%= hidden_field_tag 'client_id', @client.id %>
             </div>
             <div class="btn-group pull-right">
                 <%= submit_tag 'Guardar', class: 'btn btn-primary'%>

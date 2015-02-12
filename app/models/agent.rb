@@ -1,6 +1,7 @@
 class Agent < ActiveRecord::Base
   belongs_to :appointment
   has_many :tickets_agent
+  has_many :businesses_agent
   before_save :set_defaults
 
   def no_tickets

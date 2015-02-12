@@ -23,7 +23,11 @@
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav sindri-user">
                                         <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><%= session[:user]['full_name']%> <span class="caret"></span></a>
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="glyphicon glyphicon-user"></i>
+                                                <%= @user.full_name %> 
+                                                <span class="caret"></span>
+                                            </a>
                                             <ul class="dropdown-menu" role="menu">
                                                 <li><a href="#"><i class="glyphicon glyphicon-user"></i>Perfil</a></li>
                                                 <li><a href="#"><i class="glyphicon glyphicon-pencil"></i>Cambiar Contrase&ntilde;a</a></li>
@@ -51,27 +55,43 @@
                     </div>
                     <div class="collapse navbar-collapse" id="sindri-nav">
                         <ul class="nav navbar-nav">
-                            <% if session[:user]['type'] == 'client' %>
-                                <li><%= link_to session[:user]['business_name'], controller: "home", action: "index" %></li>
-                            <% elsif session[:user]['type'] == 'agent' %>
+                            <% if @user.type == 'client' %>
+                                <li><%= link_to @user.business_name, controller: "home", action: "index" %></li>
+                            <% elsif @user.type == 'agent' %>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">session[:user]['business_name'] <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <% for bussiness in session[:bussinesses] %>
-                                            <li><%= link_to bussiness.name, controller: "home", action: "index", id: bussiness.id %></li>
-                                        <% end %>
-                                    </ul>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        <%= @user.business_name %> 
+                                        <%if @businesses.count() > 0%>
+                                            <span class="caret"></span>
+                                        <%end%>
+                                    </a>
+                                    <%if @businesses.count() > 0%>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <% for business in @businesses %>
+                                                <li><%= link_to business.name, controller: "home", action: "index", id: business.id %></li>
+                                            <% end %>
+                                        </ul>
+                                    <%end%>
                                 </li>
                             <% end %>
-                            <li><%= link_to "Inicio", controller: "home", action: "index"%></li>
-                            <li><%= link_to "Tickets", controller: "ticket", action: "index"%></li>
-                            <li><%= link_to "Planificacion", controller: "scheldule", action: "index"%></li>
-                            <li><%= link_to "Agentes", controller: "agent", action: "index"%></li>
-                            <li><%= link_to "Clientes", controller: "client", action: "index"%></li>
-                            <li><%= link_to "Base de Conocimientos", controller: "solution", action: "index"%></li>
-                            <li><%= link_to "Reportes", controller: "report", action: "index"%></li>
-                            <li><%= link_to "Configuración", controller: "setting", action: "index"%></li>
-                            <li><%= link_to "Acerca de...", controller: "home", action: "about"%></li>
+                            <li><%= link_to "Inicio", controller: "home", action: "index" %></li>
+                            <li><%= link_to "Tickets", controller: "ticket", action: "index" %></li>
+                            <% if @user.is_in_role? 'agent' %>
+                                <li><%= link_to "Planificacion", controller: "scheldule", action: "index" %></li>
+                            <% end %>
+                            <% if @user.is_in_role? 'admin' %>
+                                <li><%= link_to "Agentes", controller: "agent", action: "index" %></li>
+                                <li><%= link_to "Clientes", controller: "client", action: "index" %></li>
+                                <li><%= link_to "Organizaciones", controller: "business", action: "index" %></li>
+                            <% end %>
+                            <% if @user.is_in_role? 'agent' or @user.is_in_role? 'admin' or @user.is_in_role? 'ticket_admin' %>
+                                <li><%= link_to "Soluciones", controller: "solution", action: "index" %></li>
+                            <% end %>
+                            <li><%= link_to "Reportes", controller: "report", action: "index" %></li>
+                            <% if @user.is_in_role? 'admin' %>
+                                <li><%= link_to "Configuración", controller: "setting", action: "index" %></li>
+                            <% end %>
+                            <li><%= link_to "Acerca de...", controller: "home", action: "about" %></li>
                         </ul>
                     </div>
                 </div>

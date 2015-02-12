@@ -8,7 +8,9 @@ module ClientHelper
         client = Client.new
         client.first_name = first_name
         client.last_name = last_name
-
+        user = YAML.load(session[:user])
+        client.business_id = user.business_id
+        client.appointment = Appointment.first
         #Create email
         if client.save
             email = Email.new

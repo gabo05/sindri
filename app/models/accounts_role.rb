@@ -1,6 +1,6 @@
-class BusinessesAgent < ActiveRecord::Base
-	belongs_to :agent
-	belongs_to :business
+class AccountsRole < ActiveRecord::Base
+	belongs_to :account
+	belongs_to :role
 	before_save :set_defaults
 	private
       def set_defaults

@@ -35,7 +35,8 @@ class ClientController < ApplicationController
         
         client.first_name = params[:first_name]
         client.last_name = params[:last_name]
-
+        client.save
+        
         email = Email.where 'client_id = ? and state = (1)::bit(1)', client.id
         account = Account.find_by email_id: email.id
 

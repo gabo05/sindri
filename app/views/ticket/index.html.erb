@@ -1,74 +1,82 @@
-<section class="center col-lg-8 col-md-8 col-sm-12 col-xs-12">
+<section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
     <h1>Tickets</h1>
+    <div class="row">
+        <div class="col-lg-4 pull-right">
+            <select class="form-control">
+                <% for state in State.all %>
+                <option value="<%= state.id %>"><%= state.name %></option>
+                <% end %>
+            </select>
+        </div>
+    </div>
+    <br>
     <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr class="info">
                     <td>Titulo</td>
-                    <td>Creada por</td>
-                    <td>Asignada a</td>
-                    <td>Fecha de Creacion</td>
-                    <td>Fecha de Vencimiento</td>
+                    <td>Creada</td>
+                    <td>Asignada</td>
+                    <td>Emitida</td>
+                    <td>Vence</td>
                     <td>Estado</td>
+                    <td>Acciones</td>
                 </tr>
             </thead>
             <tbody>
+                <% if @tickets.count > 0%>
+                <% for ticket in @tickets %>
+                    <tr>
+                        <td><%= ticket.title %></td>
+                        <td><%= ticket.client.full_name %></td>
+                        <td><%= ticket.agents.collect { |a| a.full_name }.join(', ') %></td>
+                        <td><%= ticket.created_at.strftime "%d/%m/%Y" %></td>
+                        <td><%= ticket.expire_at %></td>
+                        <td>
+                            <span class="label label-<%= ticket.current_state.css_class %>"><%= ticket.current_state.name %></span>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="<%=url_for controller: "ticket", action: "ticket", id: ticket.id %>" class="btn btn-default" title="Contestar" rel="tooltip">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                </a>
+                                <a href="<%=url_for controller: "solution", action: "solution", id: ticket.id %>" class="btn btn-default" title="Resolver" rel="tooltip">
+                                    <i class="glyphicon glyphicon-thumbs-up"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                <%  end 
+                    end%>
+                <% if @tickets.count <= 0%>
                 <tr>
-                    <td>Nueva Ticket</td>
-                    <td>Cliente 1</td>
-                    <td>Agente 1</td>
-                    <td>05/11/2014</td>
-                    <td>15/11/2014</td>
-                    <td>En proceso</td>
+                    <td colspan = "6">No hay registros que mostrar</td>
                 </tr>
-                <tr>
-                    <td>Nueva Ticket</td>
-                    <td>Cliente 1</td>
-                    <td>Agente 1</td>
-                    <td>05/11/2014</td>
-                    <td>15/11/2014</td>
-                    <td>En proceso</td>
-                </tr>
-                <tr>
-                    <td>Nueva Ticket</td>
-                    <td>Cliente 1</td>
-                    <td>Agente 1</td>
-                    <td>05/11/2014</td>
-                    <td>15/11/2014</td>
-                    <td>En proceso</td>
-                </tr>
-                <tr>
-                    <td>Nueva Ticket</td>
-                    <td>Cliente 1</td>
-                    <td>Agente 1</td>
-                    <td>05/11/2014</td>
-                    <td>15/11/2014</td>
-                    <td>En proceso</td>
-                </tr>
-                <tr>
-                    <td>Nueva Ticket</td>
-                    <td>Cliente 1</td>
-                    <td>Agente 1</td>
-                    <td>05/11/2014</td>
-                    <td>15/11/2014</td>
-                    <td>En proceso</td>
-                </tr>
+                <% end %>
             </tbody>
         </table>
     </div>
+    <% if @tickets.count > 0 %>
     <nav>
         <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
+            <li><%= link_to raw("&laquo;"), controller: "ticket", action:"index", page: 1 %></li>
+            <% 
+                page = 1 
+                until page > flash[:no_pages]
+            %>
+                <li><%= link_to page, controller: "ticket", action:"index", page: page %></li>
+            <%
+                    page+=1
+                end
+            %>
+            <li><%= link_to raw("&raquo;"), controller: "ticket", action:"index", page: flash[:no_pages] %></li>
         </ul>
     </nav>
+    <% end %>
+    <% if @user.is_in_role? 'admin' or @user.is_in_role? 'client'%>
     <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-        <%= form_for :account, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form'} do |f| %>
+        <%= render :partial => "shared/message" %>
+        <%= form_for :ticket, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form',  :multipart => true} do |f| %>
             <fieldset>
                 <legend>Nueva Ticket</legend>
                 <div class="form-group">
@@ -84,20 +92,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Agente</label>
+                    <label for="password" class="col-sm-2 control-label">Prioridad</label>
                     <div class="col-sm-10">
-                        <select class="form-control">
-                            <option>Agente1</option>
-                            <option>Agente2</option>
-                            <option>Agente3</option>
-                            <option>Agente4</option>
-                        </select>
+                        <%= select "ticket", "priority_id", @priorities.collect{ |p| [p.name, p.id] }, {}, {:class => 'form-control'} %>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">Fecha de Vencimiento</label>
                     <div class="col-sm-10">
                         <%= f.datetime_select :expire_at, :class=>'form-control', :placeholder => 'Vence' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Adjuntos</label>
+                    <div class="col-sm-10">
+                        <%= file_field_tag "attachments[]", multiple: true %>
                     </div>
                 </div>
                 <div class="form-group pull-right">
@@ -108,4 +117,5 @@
             </fieldset>
         <% end %>
     </div>
+    <% end %>
 </section>

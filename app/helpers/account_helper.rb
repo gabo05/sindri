@@ -65,9 +65,7 @@ module AccountHelper
                     business = Business.where('id = ? and state = true', client.business_id).first
                 end
                 #Load roles
-                roles = AccountsRole.where('account_id = ?', user.id).select(:role_id).map(&:attributes)
-                roles_id = Array.new
-                roles.each { |rol| roles_id.push(rol["role_id"])}
+                roles_id = AccountsRole.where('account_id = ?', user.id).collect{ |ar| ar.role_id }
                 #return data
                 activeUser = ActiveUser.new id, user, business, roles_id
                 return { 'message' => 'success', 'data' => activeUser }

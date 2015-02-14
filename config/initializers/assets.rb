@@ -13,6 +13,7 @@ Rails.application.config.assets.precompile += %w( bootstrap-switch.min.css )
 Rails.application.config.assets.precompile += %w( unsignup.css )
 Rails.application.config.assets.precompile += %w( scheldule.css )
 Rails.application.config.assets.precompile += %w( gantt.css )
+Rails.application.config.assets.precompile += %w( client.css )
 
 #js
 Rails.application.config.assets.precompile += %w( jquery.min.js )
@@ -22,3 +23,4 @@ Rails.application.config.assets.precompile += %w( agent.js )
 Rails.application.config.assets.precompile += %w( jquery.fn.gantt.js )
 Rails.application.config.assets.precompile += %w( scheldule.js )
 Rails.application.config.assets.precompile += %w( setting.js )
+Rails.application.config.assets.precompile += %w( image_upload.js )

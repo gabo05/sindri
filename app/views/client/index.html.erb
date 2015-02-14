@@ -1,4 +1,4 @@
-<section class="center col-lg-8 col-md-8 col-sm-12 col-xs-12">
+<section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
     <h1>Clientes</h1>
     <div class="table-responsive">
         <table class="table table-hover">
@@ -7,6 +7,7 @@
                     <td>Nombre</td>
                     <td>Correo Electrónico</td>
                     <td>Telefono</td>
+                    <td>Organizaci&oacute;n</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
                         <td><%= email.client.full_name %></td>
                         <td><%= email.email %></td>
                         <td><%= email.client.phone_number %></td>
+                        <td><%= email.client.business.name%></td>
                         <td>
                             <div class="btn-group">
                                 <a href="<%=url_for controller: "client", action: "edit", id: email.client.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>

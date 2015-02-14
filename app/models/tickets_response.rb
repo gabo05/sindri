@@ -1,6 +1,6 @@
-class TicketsAgent < ActiveRecord::Base
-	belongs_to :agent
+class TicketsResponse < ActiveRecord::Base
 	belongs_to :ticket
+	belongs_to :account
 	before_save :set_defaults
 	private
 	  def set_defaults

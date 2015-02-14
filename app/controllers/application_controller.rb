@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
                 redirect_to action: 'login', controller: 'account'
             else
                 @user = YAML.load(session[:user])
-                @businesses = YAML.load(session[:businesses])
+                if(@user.type == 'agent')
+                    @businesses = YAML.load(session[:businesses])
+                end
             end
         end
 end

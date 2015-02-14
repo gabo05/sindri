@@ -6,7 +6,6 @@ class Client < ActiveRecord::Base
   def full_name
   	return "#{self.first_name} #{self.last_name}"
   end
-
   private
       def set_defaults
         self.state ||= 1

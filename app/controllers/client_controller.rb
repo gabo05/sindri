@@ -35,10 +35,19 @@ class ClientController < ApplicationController
         
         client.first_name = params[:first_name]
         client.last_name = params[:last_name]
+        client.phone_number = params[:phone_number]
         client.save
-        
-        email = Email.where 'client_id = ? and state = (1)::bit(1)', client.id
+
+        email = Email.where('client_id = ? and state = (1)::bit(1)', client.id).first
         account = Account.find_by email_id: email.id
+
+        if params[:picture] != nil
+            uploaded_io = params[:picture]
+            File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+                file.write(uploaded_io.read)
+            end
+            account.picture = uploaded_io.original_filename
+        end
 
         if email.email != params[:email] && params[:email] != "" && params[:email] != nil
             #Disabled the old email, but not delete
@@ -52,9 +61,8 @@ class ClientController < ApplicationController
 
             #Update email account
             account.email = email
-            account.save
         end
-
-    	redirect_to url_for(:controller => :client, :action => :edit, :id => params[:email])
+        account.save
+    	redirect_to url_for(:controller => :client, :action => :edit, :id => client.id)
     end
 end

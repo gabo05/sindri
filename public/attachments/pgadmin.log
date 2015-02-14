@@ -1,0 +1,133 @@
+2014-11-04 14:44:07 ERROR  : Error connecting to the server: FATAL:  la autentificación password falló para el usuario «postgres»
+
+2014-11-05 20:20:28 ERROR  : ERROR:  error de sintaxis en o cerca de «assigned»
+LINE 428: CREATE INDEX IFK_is assigned ON tickets_agents (tickets_id);
+                              ^
+2014-11-05 20:21:37 ERROR  : ERROR:  error de sintaxis en o cerca de «assigned»
+LINE 562: CREATE INDEX IFK_is assigned ON tickets_groups (groups_id);
+                              ^
+2014-11-05 20:22:22 ERROR  : ERROR:  no existe el tipo «datetime»
+LINE 5:   created_at DATETIME    ,
+                     ^
+2014-11-05 20:24:17 ERROR  : ERROR:  la relación «ifk_has_many» ya existe
+2014-11-05 20:25:45 ERROR  : ERROR:  la relación «ifk_is_assigned» ya existe
+2014-11-05 20:26:18 ERROR  : ERROR:  la relación «ifk_rel_20» ya existe
+2014-11-05 20:26:52 ERROR  : ERROR:  la relación «ifk_is_assigned» ya existe
+2014-11-05 20:27:29 ERROR  : ERROR:  la relación «ifk_is_assigned_t» ya existe
+2014-11-21 00:05:36 ERROR  : ERROR:  la columna «state» es de tipo bit pero la expresión default es de tipo integer
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2014-11-21 00:05:51 ERROR  : ERROR:  la columna «state» es de tipo bit pero la expresión default es de tipo boolean
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2014-11-21 00:06:12 ERROR  : ERROR:  la columna «state» es de tipo bit pero la expresión default es de tipo integer
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2014-11-21 00:06:13 ERROR  : ERROR:  la columna «state» es de tipo bit pero la expresión default es de tipo integer
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2014-11-21 00:28:07 ERROR  : ERROR:  update o delete en «agents» viola la llave foránea «emails_agents_id_fkey» en la tabla «emails»
+DETAIL:  La llave (id)=(5) todavía es referida desde la tabla «emails».
+2014-11-21 00:40:44 ERROR  : ERROR:  update o delete en «emails» viola la llave foránea «accounts_emails_id_fkey» en la tabla «accounts»
+DETAIL:  La llave (id)=(5) todavía es referida desde la tabla «accounts».
+2014-11-21 00:41:24 ERROR  : ERROR:  update o delete en «agents» viola la llave foránea «emails_agents_id_fkey» en la tabla «emails»
+DETAIL:  La llave (id)=(8) todavía es referida desde la tabla «emails».
+2014-11-21 00:48:02 ERROR  : ERROR:  error de sintaxis en o cerca de «from»
+LINE 2: delete from emails
+               ^
+2015-01-19 21:00:20 ERROR  : Error connecting to the server: FATAL:  la autentificación password falló para el usuario «postgres»
+
+2015-01-19 21:46:31 ERROR  : ERROR:  update o delete en «emails» viola la llave foránea «accounts_emails_id_fkey» en la tabla «accounts»
+DETAIL:  La llave (id)=(10) todavía es referida desde la tabla «accounts».
+2015-01-21 23:52:29 ERROR  : ERROR:  update o delete en «agents» viola la llave foránea «emails_agents_id_fkey» en la tabla «emails»
+DETAIL:  La llave (id)=(14) todavía es referida desde la tabla «emails».
+2015-01-23 21:18:02 ERROR  : ERROR:  error de sintaxis en o cerca de «from»
+LINE 2: delete from agents
+               ^
+2015-01-23 21:25:29 ERROR  : ERROR:  update o delete en «agents» viola la llave foránea «emails_agents_id_fkey» en la tabla «emails»
+DETAIL:  La llave (id)=(15) todavía es referida desde la tabla «emails».
+2015-01-26 06:16:35 ERROR  : ERROR:  la columna «confirmed» es de tipo bit pero la expresión default es de tipo integer
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2015-01-26 06:20:07 ERROR  : ERROR:  la columna «confirmed» es de tipo bit pero la expresión default es de tipo integer
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2015-01-26 06:20:31 ERROR  : ERROR:  la columna «confirmed» es de tipo bit pero la expresión default es de tipo integer
+HINT:  Necesitará reescribir la expresión o aplicarle una conversión de tipo.
+2015-02-07 00:47:06 ERROR  : ERROR:  no existe la columna ac.password
+LINE 9:  ,ac.password
+          ^
+2015-02-10 00:31:22 ERROR  : ERROR:  el valor null para la columna «created_at» viola la restricción not null
+DETAIL:  La fila que falla contiene (1, Administrador, Se encarga de invitar agentes y clientes, aprobar tickets y rech..., null, null, null).
+2015-02-10 00:31:43 ERROR  : ERROR:  el valor null para la columna «updated_at» viola la restricción not null
+DETAIL:  La fila que falla contiene (2, Administrador, Se encarga de invitar agentes y clientes, aprobar tickets y rech..., 2015-02-10 00:00:00, null, null).
+2015-02-10 00:31:57 ERROR  : ERROR:  el valor null para la columna «state» viola la restricción not null
+DETAIL:  La fila que falla contiene (3, Administrador, Se encarga de invitar agentes y clientes, aprobar tickets y rech..., 2015-02-10 00:00:00, 2015-02-10 00:00:00, null).
+2015-02-11 00:03:30 ERROR  : ERROR:  no se puede eliminar tabla business porque otros objetos dependen de él
+DETAIL:  restricción «clients_business_id_fkey» en tabla clients depende de tabla business
+restricción «business_agents_business_id_fkey» en tabla businesses_agents depende de tabla business
+HINT:  Use DROP ... CASCADE para eliminar además los objetos dependientes.
+2015-02-11 00:04:32 ERROR  : ERROR:  la restricción «clients_business_id_fkey» para la relación «clients» ya existe
+2015-02-11 00:09:39 ERROR  : ERROR:  no existe la relación «business»
+LINE 1: DELETE FROM business;
+                    ^
+2015-02-11 00:09:47 ERROR  : ERROR:  no existe la relación «business»
+LINE 1: DELETE FROM business;
+                    ^
+2015-02-11 00:09:59 ERROR  : ERROR:  update o delete en «businesses» viola la llave foránea «businesses_agents_businesses_id_fkey» en la tabla «businesses_agents»
+DETAIL:  La llave (id)=(5) todavía es referida desde la tabla «businesses_agents».
+2015-02-11 00:33:35 ERROR  : ERROR:  no existe la relación «business_agents»
+LINE 16:   join business_agents ba on ba.agent_id = a.id
+                ^
+2015-02-11 00:33:56 ERROR  : ERROR:  no existe la relación «business»
+LINE 18:   join business b on b.id = ba.business_id
+                ^
+2015-02-11 00:39:31 ERROR  : ERROR:  el operador no existe: boolean = bit
+LINE 1: ...elect * FROM "businesses" WHERE id = 15 and state = (1)::bit...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:39:50 ERROR  : ERROR:  el operador no existe: boolean = integer
+LINE 1: select * FROM "businesses" WHERE id = 15 and state = 1;
+                                                           ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:40:30 ERROR  : ERROR:  el operador no existe: boolean = bit
+LINE 1: ...elect * FROM "businesses" WHERE id = 15 and state = (1)::bit...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:41:04 ERROR  : ERROR:  el operador no existe: boolean = bit
+LINE 1: ...elect * FROM "businesses" WHERE id = 15 and state = (1)::bit...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:41:09 ERROR  : ERROR:  el operador no existe: boolean = bit
+LINE 1: ...elect * FROM "businesses" WHERE id = 15 and state = (1)::bit...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:41:29 ERROR  : ERROR:  el operador no existe: boolean = bit
+LINE 1: ...elect * FROM "businesses" WHERE id = 15 and state = (1)::bit...
+                                                             ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:47:07 ERROR  : ERROR:  el operador no existe: bit = boolean
+LINE 2: select * FROM "emails" WHERE (id = 53 and state = true) 
+                                                        ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 00:47:18 ERROR  : ERROR:  el operador no existe: bit = integer
+LINE 1: select * FROM "emails" WHERE (id = 53 and state = 1) 
+                                                        ^
+HINT:  Ningún operador coincide con el nombre y el tipo de los argumentos. Puede ser necesario agregar conversiones explícitas de tipos.
+2015-02-11 02:59:15 ERROR  : ERROR:  update o delete en «accounts» viola la llave foránea «accounts_roles_accounts_id_fkey» en la tabla «accounts_roles»
+DETAIL:  La llave (id)=(46) todavía es referida desde la tabla «accounts_roles».
+2015-02-11 03:00:53 ERROR  : ERROR:  no se permiten múltiples llaves primarias para la tabla «accounts_roles»
+2015-02-12 02:48:38 ERROR  : ERROR:  llave duplicada viola restricción de unicidad «states_pkey»
+DETAIL:  Ya existe la llave (id)=(3).
+2015-02-14 00:24:38 ERROR  : ERROR:  la columna «order» contiene valores nulos
+2015-02-14 00:55:14 ERROR  : ERROR:  error de sintaxis en o cerca de «order»
+LINE 1: SELECT "states".* FROM "states" WHERE (order = 1 and state =...
+                                               ^
+2015-02-14 00:56:07 ERROR  : ERROR:  error de sintaxis en o cerca de «order»
+LINE 1: SELECT "states".* FROM "states" WHERE (order = (1)::integer ...
+                                               ^
+2015-02-14 00:56:20 ERROR  : ERROR:  error de sintaxis en o cerca de «order»
+LINE 1: SELECT "states".* FROM "states" WHERE (order = 1 and state =...
+                                               ^
+2015-02-14 03:44:15 ERROR  : ERROR:  el valor null para la columna «priority_id» viola la restricción not null
+DETAIL:  La fila que falla contiene (19, null, null, null, null, null, null, null, null, null).
+2015-02-14 03:44:22 ERROR  : ERROR:  el valor null para la columna «priority_id» viola la restricción not null
+DETAIL:  La fila que falla contiene (19, null, null, null, null, null, null, null, null, null).
+2015-02-14 05:46:47 ERROR  : ERROR:  no existe la relación «tickets_agents_id_seq»
+2015-02-14 05:48:09 ERROR  : ERROR:  no existe la relación «tickets_agents_id_seq»
+2015-02-14 07:45:24 ERROR  : ERROR:  update o delete en «solutions» viola la llave foránea «solutions_attachments_solutions_id_fkey» en la tabla «solutions_attachments»
+DETAIL:  La llave (id)=(4) todavía es referida desde la tabla «solutions_attachments».

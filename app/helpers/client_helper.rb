@@ -25,6 +25,12 @@ module ClientHelper
                 user.passsword = AESCrypt.encrypt password, MY_CONFIG['encrypt_password']
                 user.picture = 'avatar_default.png'
                 if user.save
+                    #Assign role
+                    role = Role.where('default_to = 5 and state = (1)::bit(1)').first
+                    account_role = AccountsRole.new
+                    account_role.role = role
+                    account_role.account = user
+                    account_role.save
                     AgentMailer::agent_invitation(email.email, user).deliver
                     return true
                 end

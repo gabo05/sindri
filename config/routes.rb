@@ -84,17 +84,29 @@ Rails.application.routes.draw do
   #GET
   get "solution/index"
   
-  get "solution/solution"
+  get "solution/solution/:id", to: "solution#solution"
 
   #POST  
   post "solution/search"
+
+  post "solution/acept"
+
+  post "solution/create"
   
   #Ticket Controller Routes
   #GET
   get "ticket/index"
 
+  get "ticket/index/:page", to: "ticket#index"
+
+  get "ticket/ticket/:id", to:"ticket#ticket"
+
   #POST
   post "ticket/create"
+
+  post "ticket/send_response"
+
+  post "ticket/asign"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

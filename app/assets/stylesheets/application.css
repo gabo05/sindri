@@ -35,3 +35,16 @@ header h1, header img{
     margin-left: auto;
     margin-right: auto;
 }
+.picture-field{
+    width: 0;
+    height: 0;
+}
+#preview-picture{
+    max-width: 130px;
+}
+.table thead tr td{
+    font-weight: bold;
+}
+#tickets-home .panel{
+    height: 220px !important;
+}

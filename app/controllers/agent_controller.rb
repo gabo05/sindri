@@ -1,5 +1,6 @@
 class AgentController < ApplicationController
     include AgentHelper
+    include ApplicationHelper
     def index
         size = params[:size].to_i == 0 ? 10 : params[:size].to_i
         
@@ -37,8 +38,14 @@ class AgentController < ApplicationController
         agent.last_name = params[:last_name]
         agent.save
         
-        email = Email.where 'agent_id = ? and state = true', agent.id
+        email = Email.where('agent_id = ? and state = (1)::bit(1)', agent.id).first
         account = Account.find_by email_id: email.id
+
+        if params[:picture] != nil
+            uploaded_io = params[:picture]
+            upload_file_to(uploaded_io, Rails.root.join('public', 'uploads', uploaded_io.original_filename))
+            account.picture = uploaded_io.original_filename
+        end
 
         if email.email != params[:email] && params[:email] != "" && params[:email] != nil
             #Disabled the old email, but not delete
@@ -52,9 +59,8 @@ class AgentController < ApplicationController
 
             #Update email account
             account.email = email
-            account.save
         end
-
-    	redirect_to url_for(:controller => :agent, :action => :edit, :id => params[:email])
+        account.save
+    	redirect_to url_for(:controller => :agent, :action => :edit, :id => agent.id)
     end
 end

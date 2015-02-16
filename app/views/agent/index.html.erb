@@ -11,20 +11,20 @@
                 </tr>
             </thead>
             <tbody>
-                <% if @emails.count == 0 %>
+                <% if @agents.count == 0 %>
                 <tr>
                     <td colspan="4">No hay registros que mostrar</td>
                 </tr>
                 <% else
-                    for email in @emails %>
+                    for agent in @agents %>
                     <tr>
-                        <td><%= email.agent.full_name %></td>
-                        <td><%= email.email %></td>
-                        <td><%= email.agent.no_tickets %></td>
+                        <td><%= agent.full_name %></td>
+                        <td><%= agent.email_account %></td>
+                        <td><%= agent.no_tickets %></td>
                         <td>
                             <div class="btn-group">
-                                <a href="<%=url_for controller: "agent", action: "edit", id: email.agent.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
-                                <a href="<%=url_for controller: "agent", action: "delete", id: email.agent.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
+                                <a href="<%=url_for controller: "agent", action: "edit", id: agent.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
+                                <a href="<%=url_for controller: "agent", action: "delete", id: agent.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -33,22 +33,8 @@
             </tbody>
         </table>
     </div>
-    <% if @emails.count > 0 %>
-    <nav>
-        <ul class="pagination">
-            <li><%= link_to raw("&laquo;"), controller: "agent", action:"index", page: 1 %></li>
-            <% 
-                page = 1 
-                until page > flash[:no_pages]
-            %>
-                <li><%= link_to page, controller: "agent", action:"index", page: page %></li>
-            <%
-                    page+=1
-                end
-            %>
-            <li><%= link_to raw("&raquo;"), controller: "agent", action:"index", page: flash[:no_pages] %></li>
-        </ul>
-    </nav>
+    <% if @agents.count > 0 %>
+    <%= pagination_tag @pagination, "agent", "index" %>
     <% end %>
     <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
         <%= render :partial => "shared/message" %>

@@ -12,21 +12,21 @@
                 </tr>
             </thead>
             <tbody>
-                <% if @emails.count == 0 %>
+                <% if @clients.count == 0 %>
                 <tr>
                     <td colspan="4">No hay registros que mostrar</td>
                 </tr>
                 <% else
-                    for email in @emails %>
+                    for client in @clients %>
                     <tr>
-                        <td><%= email.client.full_name %></td>
-                        <td><%= email.email %></td>
-                        <td><%= email.client.phone_number %></td>
-                        <td><%= email.client.business.name%></td>
+                        <td><%= client.full_name %></td>
+                        <td><%= client.email_account %></td>
+                        <td><%= client.phone_number %></td>
+                        <td><%= client.business.name%></td>
                         <td>
                             <div class="btn-group">
-                                <a href="<%=url_for controller: "client", action: "edit", id: email.client.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
-                                <a href="<%=url_for controller: "client", action: "delete", id: email.client.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
+                                <a href="<%=url_for controller: "client", action: "edit", id: client.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
+                                <a href="<%=url_for controller: "client", action: "delete", id: client.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -35,21 +35,8 @@
             </tbody>
         </table>
     </div>
-    <% if @emails.count > 0 %>
-    <nav>
-        <ul class="pagination">
-            <li><%= link_to raw("&laquo;"), controller: "client", action:"index", page: 1 %></li>
-            <% 
-                page = 1 
-                until page > flash[:no_pages]
-            %>
-                <li><%= link_to page, controller: "client", action:"index", page: page %></li>
-            <%
-                    page+=1
-                end
-            %>
-            <li><%= link_to raw("&raquo;"), controller: "client", action:"index", page: flash[:no_pages] %></li>
-        </ul>
+    <% if @clients.count > 0 %>
+    <%= pagination_tag @pagination, "client", "index" %>
     </nav>
     <% end %>
     <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">

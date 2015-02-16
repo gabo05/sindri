@@ -33,8 +33,19 @@ Rails.application.routes.draw do
   #Bussines Controller Routes
   #GET
   get "business/index"
+
+  get "business/index/:page", to: "business#index"
+
+  get "business/edit/:id", to: "business#edit"
+
+  get "business/delete/:id", to: "business#delete"
+
+  get "business/add_agent"
+
+  get "business/remove_agent"
+
   #POST
-  post "business/update"
+  post "business/create"
     
   #Client Controller Routes
   #GET

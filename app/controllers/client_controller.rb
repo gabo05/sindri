@@ -1,20 +1,13 @@
 class ClientController < ApplicationController
     include ClientHelper
     def index
-        size = params[:size].to_i == 0 ? 10 : params[:size].to_i
+        user = YAML.load(session[:user])
+
+        all_clients = Client.where('state = (1)::bit(1) and business_id = ?', user.business_id)
         
-        page = params[:page].to_i <= 0 ? params[:page].to_i : params[:page].to_i() -1
-        
-        all_emails = Email.where('state = (1)::bit(1) and client_id is not null')
-        
-        no_records = all_emails.count
+        @pagination = Pagination.new params[:page], params[:size], all_clients
 
-        no_pages = (no_records % size) > 0 ? no_records / size + 1 : no_records / size
-
-        flash[:no_pages] = no_pages
-
-        @emails = all_emails.limit(size).offset(page*size)
-
+        @clients = @pagination.get_records
     end
     
     def invite

@@ -2,17 +2,12 @@ class TicketController < ApplicationController
 	include TicketHelper
     def index
     	@user = YAML.load(session[:user])
-
-    	size = params[:size].to_i == 0 ? 5 : params[:size].to_i
-        page = params[:page].to_i <= 0 ? params[:page].to_i : params[:page].to_i() -1
         
         all_tickets = get_tickets_for(@user)
 
-        no_records = all_tickets.count
-        no_pages = (no_records % size) > 0 ? no_records / size + 1 : no_records / size
-        flash[:no_pages] = no_pages
+        @pagination = Pagination.new params[:page], params[:size], all_tickets
         
-        @tickets = all_tickets.limit(size).offset(page*size)
+        @tickets = @pagination.get_records
     	@business = Business.where('id = ?', @user.business_id).first
     	@priorities = Priority.where('state = (1)::bit(1)')
     end

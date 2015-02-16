@@ -57,21 +57,7 @@
         </table>
     </div>
     <% if @tickets.count > 0 %>
-    <nav>
-        <ul class="pagination">
-            <li><%= link_to raw("&laquo;"), controller: "ticket", action:"index", page: 1 %></li>
-            <% 
-                page = 1 
-                until page > flash[:no_pages]
-            %>
-                <li><%= link_to page, controller: "ticket", action:"index", page: page %></li>
-            <%
-                    page+=1
-                end
-            %>
-            <li><%= link_to raw("&raquo;"), controller: "ticket", action:"index", page: flash[:no_pages] %></li>
-        </ul>
-    </nav>
+    <%= pagination_tag @pagination, "ticket", "index" %>
     <% end %>
     <% if @user.is_in_role? 'admin' or @user.is_in_role? 'client'%>
     <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">

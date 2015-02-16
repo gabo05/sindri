@@ -2,6 +2,7 @@ class ActiveUser
 	protected
 		attr_writer :business_id
 		attr_writer :business_name
+		attr_writer :business_logo
 	public
 		attr_reader :id
 		attr_reader :type
@@ -10,6 +11,7 @@ class ActiveUser
 		attr_reader :business_id
 		attr_reader :business_name
 		attr_reader :roles
+		attr_reader :business_logo
 
 		def initialize(id, user, business, roles)
 			@id = id
@@ -18,11 +20,13 @@ class ActiveUser
 			@user_id = user.id
 			self.business_id = business.id
 			self.business_name = business.name
+			self.business_logo = business.logo
 			@roles = roles
 		end
 		def business=(business)
 			self.business_id = business.id
 			self.business_name = business.name
+			self.business_logo = business.logo
 		end
 		def is_in_role?(role)
 			role_rol = Role.where('key_name = ? and id = ?', role, self.roles).first

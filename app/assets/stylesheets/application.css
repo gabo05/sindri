@@ -45,6 +45,9 @@ header h1, header img{
 .table thead tr td{
     font-weight: bold;
 }
+.table tr td img{
+    max-width: 50px;
+}
 #tickets-home .panel{
     height: 220px !important;
 }

@@ -51,6 +51,11 @@ module TicketHelper
                     end
                 end
             end
+            #save the category
+            ticket_category = TicketsCategory.new
+            ticket_category.category_id = data[:category_id]
+            ticket_category.ticket_id = ticket.id
+            ticket_category.save
         end
     end
 end

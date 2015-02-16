@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 
   #POST
   post "business/create"
+
+  post "business/save"
     
   #Client Controller Routes
   #GET

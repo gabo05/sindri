@@ -3,9 +3,12 @@ class Pagination
 	attr_accessor :page
 	attr_reader :no_pages
 	attr_reader :collection
+
+	@@default_size = 5
+	
 	def initialize(page, size, collection)
 
-		@size = size.to_i == 0 ? 5 : size.to_i
+		@size = size.to_i == 0 ? @@default_size : size.to_i
         
         @page = page.to_i <= 0 ? page.to_i : page.to_i() -1
 

@@ -6,18 +6,18 @@ module ApplicationHelper
 	end
 	def pagination_tag(pagination, controller, action)
 		pages = content_tag(:li) do
-					link_to raw("&laquo;"), controller: controller, action: action, page: 1
+					link_to raw("&laquo;"), controller: controller, action: action, page: 1, size: pagination.size
 				end
 		page = 1 
 		no_pages = pagination.no_pages
         until page > no_pages
 			pages << content_tag(:li) do
-				link_to page, controller: controller, action: action, page: page
+				link_to page, controller: controller, action: action, page: page, size: pagination.size
 			end
 			page+=1
 		end
 		pages << content_tag(:li) do
-					link_to raw("&raquo;"), controller: controller, action: action, page: no_pages
+					link_to raw("&raquo;"), controller: controller, action: action, page: no_pages, size: pagination.size
 				end
 		content_tag(:nav) do
 			content_tag(:ul, :class => "pagination") do

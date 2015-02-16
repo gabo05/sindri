@@ -1,6 +1,6 @@
 <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
     <%= render :partial => "shared/message" %>
-    <%= form_tag url_for(:controller => :business, :action => :create), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
+    <%= form_tag url_for(:controller => :business, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
         <fieldset>
             <legend>Organizaci&oacute;n</legend>
             <div class="form-group">
@@ -16,6 +16,7 @@
                     <%= file_field_tag 'picture', class: 'picture-field'%>
                 </div>
             </div>
+            <%= hidden_field_tag 'id', @business.id %>
             <div class="form-group pull-right">
                 <div class="col-sm-offset-2 col-sm-10">
                     <%= submit_tag "Guardar", class: 'btn btn-primary btn-lg' %>

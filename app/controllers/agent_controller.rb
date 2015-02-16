@@ -5,7 +5,8 @@ class AgentController < ApplicationController
         user = YAML.load(session[:user])
         all_agents = Business.agents(user.business_id)
         @pagination = Pagination.new params[:page], params[:size], all_agents
-        @agents = pagination.get_records
+        @agents = @pagination.get_records
+        @appointments = Appointment.all
     end
     
     def invite
@@ -20,6 +21,7 @@ class AgentController < ApplicationController
     	@agent = Agent.find_by id: params[:id]
         @email = Email.where('agent_id = ? and state = (1)::bit(1)', @agent.id).first
     	@account = Account.find_by email_id: @email.id
+        @appointments = Appointment.all
     end
     def save
         agent = Agent.find_by id: params[:agent_id]

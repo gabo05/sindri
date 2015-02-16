@@ -5,6 +5,7 @@
             <thead>
                 <tr class="info">
                     <td>Nombre</td>
+                    <td>Cargo</td>
                     <td>Correo Electrónico</td>
                     <td>No de Tickets</td>
                     <td>Acciones</td>
@@ -19,6 +20,7 @@
                     for agent in @agents %>
                     <tr>
                         <td><%= agent.full_name %></td>
+                        <td><%= agent.appointment.name%></td>
                         <td><%= agent.email_account %></td>
                         <td><%= agent.no_tickets %></td>
                         <td>
@@ -57,6 +59,12 @@
                     <label for="email" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
                         <%= email_field_tag 'email', nil, class: 'form-control', placeholder: 'Correo Electrónico' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Cargo</label>
+                    <div class="col-sm-10">
+                        <%= select "agent", "appointment_id", @appointments.collect{ |p| [p.name, p.id] }, {}, {:class => 'form-control'} %>
                     </div>
                 </div>
                 <div class="form-group pull-right">

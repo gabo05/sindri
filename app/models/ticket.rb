@@ -18,6 +18,11 @@ class Ticket < ActiveRecord::Base
   	state = State.where('id = ?', state_ticket.state_id).first
   	return state
   end
+  def categories
+    category_ids = TicketsCategory.where('ticket_id = ? and state = (1)::bit(1)', self.id).collect{ |tc| tc.id }
+    categories = Category.where('id in (?) and state = (1)::bit(1)', category_ids)
+    return categories
+  end
   def is_asigned_to?(agent)
     result = self.agents.where('id = ?', agent.id)
     return result.count > 0

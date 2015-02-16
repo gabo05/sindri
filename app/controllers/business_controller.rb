@@ -35,6 +35,17 @@ class BusinessController < ApplicationController
 		@business = Business.where('id = ? and state = true', params[:id]).first
 		@agents = Agent.all
 	end
+	def save
+		business = Business.where('id = ? and state = true', params[:id]).first
+		business.name = params[:name]
+		if params[:picture] != nil
+	        uploaded_io = params[:picture]
+	        upload_file_to(uploaded_io, Rails.root.join('public', 'logos', uploaded_io.original_filename))
+	        business.logo = uploaded_io.original_filename
+	    end
+	    business.save
+	    redirect_to url_for controller: "business", action: "edit", id: params[:id]
+	end
 	def add_agent
 		business_agent = BusinessesAgent.new
 		business_agent.agent_id = params[:agent_id]

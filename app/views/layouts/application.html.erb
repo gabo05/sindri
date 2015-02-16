@@ -14,8 +14,8 @@
 			<header>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<%= image_tag "logo.png", :alt => "", :title => "Tickets"%>
-						<h1>Brokkeneitri</h1>
+						<%= image_tag "/logos/#{@user.business_logo}", :alt => @user.business_name, :title => @user.business_name%>
+						<h1><%= @user.business_name %></h1>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<nav class="navbar pull-right" role="navigation">

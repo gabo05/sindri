@@ -1,22 +1,35 @@
-<section class="center col-lg-8 col-md-8 col-sm-12 col-xs-12">
+<section class="center col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <h1>Base de Conocimientos</h1>
-    <%= form_for :solution, :url => {:action => "search", :controller => "solution"}, :html => {:class=>'form-horizontal', :role=>'form'} do |f| %>    
-        <div class = "input-group" > 
-            <%= f.text_field :solution, :class=>'form-control', :placeholder => 'Escriba aquí su búsqueda' %>
-            <div class = "input-group-btn"> 
-                <%= f.submit :class => 'btn btn-primary', :value => 'Buscar' %>
+    <div class="form-horizontal col-lg-10 col-md-10 center" role="form">
+        <div class="input-group" >
+            <input type="text" id="key" class="form-control" placeholder="Escriba aquí su búsqueda">
+            <div class = "input-group-btn">
+                <button id="search" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-search"></i>Buscar
+                </button>
             </div>    
         </div>
-    <%end%>
-    <nav>
-        <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
-    </nav>
+    </div>
+    <br>
+    <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
+        <% if @solutions and @solutions.count > 0 %>
+        <% for solution in @solutions %>
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <h4><%= link_to solution.title, controller: "solution", action: "show", id: solution.id %></h4>
+                    <p><%= solution.description %></p>
+                </div>
+            </div>
+        <% end %>
+        <% elsif @solutions and @solutions.count = 0 %>
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <h5>La b&uacute;squeda no gener&oacute; ning&uacute;n resultado</h5>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <% if @pagination and @solutions.count > 0%>
+    <%= pagination_tag @pagination, "solution", "index" %>
+    <% end %>
 </section>

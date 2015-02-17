@@ -99,9 +99,9 @@ Rails.application.routes.draw do
   
   get "solution/solution/:id", to: "solution#solution"
 
-  #POST  
-  post "solution/search"
+  get "solution/show/:id", to: "solution#show"
 
+  #POST
   post "solution/acept"
 
   post "solution/create"

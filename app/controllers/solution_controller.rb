@@ -1,8 +1,16 @@
 class SolutionController < ApplicationController
 	include ApplicationHelper
     def index
+        if(params[:key])
+            key = params[:key]
+            all_solutions = Solution.where('title like ? or description like ?', "%#{key}%", "%#{key}%")
+            @pagination = Pagination.new params[:page], params[:size], all_solutions
+            @solutions = @pagination.get_records
+        end
     end
-    def search
+    def show
+        @solution = Solution.where('id = ?', params[:id]).first
+        @ticket_id = TicketsSolution.where('solution_id = ?', params[:id]).first.ticket_id
     end
     def acept
     	@user = YAML.load(session[:user])

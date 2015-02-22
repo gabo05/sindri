@@ -55,7 +55,7 @@
             </div>
             <div id="collapseBusiness" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBusiness">
                 <div class="panel-body">
-                    <%= form_for :business, :url => {:action => "update", :controller => "business"}, :html => {:class=>'form-horizontal', :role=>'form'} do |f| %>
+                    <%= form_for :business, :url => {:action => "save", :controller => "business"}, :html => {:class=>'form-horizontal', :role=>'form'} do |f| %>
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Nombre</label>
                             <div class="col-sm-10">

@@ -15,7 +15,7 @@ class TicketController < ApplicationController
     def create
     	data = params[:ticket]
 
-    	open_ticket(data, params[:attachments])
+    	open_ticket(data, params[:attachments], params)
     	flash[:message] = { 'type' => 'success', 'text' => "La ticket ha sido creada y enviada para aprobación" }
     	redirect_to url_for :controller => 'ticket', :action => 'index'
     end

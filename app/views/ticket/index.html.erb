@@ -61,7 +61,7 @@
     <% if @tickets.count > 0 %>
     <%= pagination_tag @pagination, "ticket", "index" %>
     <% end %>
-    <% if @user.is_in_role? 'admin' or @user.is_in_role? 'client'%>
+    <% if @user.is_in_role? 'client'%>
     <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
         <%= render :partial => "shared/message" %>
         <%= form_for :ticket, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form',  :multipart => true} do |f| %>
@@ -94,7 +94,7 @@
                 <div class="form-group">
                     <label for="password" class="col-sm-2 control-label">Fecha de Vencimiento</label>
                     <div class="col-sm-10">
-                        <%= f.datetime_select :expire_at, :class=>'form-control', :placeholder => 'Vence' %>
+                        <%= date_picker_tag 'expire_at', nil %>
                     </div>
                 </div>
                 <div class="form-group">

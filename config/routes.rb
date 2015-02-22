@@ -80,11 +80,17 @@ Rails.application.routes.draw do
 
   #POST
 
-  #Scheldule Controller Routes
+  #Schedule Controller Routes
   #GET
-  get "scheldule/index"
+  get "schedule/index"
+
+  get "schedule/activities/:id", to: "schedule#activities"
 
   #POST
+
+  post "schedule/create"
+
+  post "schedule/add_activity"
 
   #Setting Controller Routes
   #GET

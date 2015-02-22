@@ -25,4 +25,10 @@ module ApplicationHelper
 			end
 		end
 	end
+	def date_picker_tag(name, value)
+		content = text_field_tag name, value, class: 'form-control'
+		content << content_tag(:span, content_tag(:span, nil, class: 'glyphicon glyphicon-calendar'), class: 'input-group-addon')
+
+		content_tag(:div, content, class: 'input-group date', id: "dtp_#{name}")
+	end
 end

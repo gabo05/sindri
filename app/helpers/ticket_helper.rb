@@ -13,7 +13,7 @@ module TicketHelper
     	end
     	return tickets
 	end
-    def open_ticket(data, attachments)
+    def open_ticket(data, attachments, params)
         user = YAML.load(session[:user])
         
         #Create the ticket
@@ -23,7 +23,7 @@ module TicketHelper
         ticket.description = data[:description]
         ticket.client_id = user.id
         ticket.priority_id = data[:priority_id]
-        ticket.expire_at = data[:expire_at]
+        ticket.expire_at = params[:expire_at].to_date
         ticket.business_id = user.business_id
 
         if ticket.save

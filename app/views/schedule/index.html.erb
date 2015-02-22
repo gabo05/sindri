@@ -1,18 +1,18 @@
 <section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#cntScheldule" role="tab" data-toggle="tab"><h4>Cronograma</h4></a></li>
-        <li role="presentation"><a href="#cntGantt" role="tab" data-toggle="tab"><h4>Diagrama de Gantt</h4></a></li>
-        <li role="presentation"><a href="#cntCalendar" role="tab" data-toggle="tab"><h4>Calendario</h4></a></li>
+        <li role="presentation"><a href="#cntGantt" id="dgantt" role="tab" data-toggle="tab"><h4>Diagrama de Gantt</h4></a></li>
+        <!-- <li role="presentation"><a href="#cntCalendar" role="tab" data-toggle="tab"><h4>Calendario</h4></a></li> -->
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="cntScheldule">
-            <%= render :partial => "scheldule" %>
+            <%= render :partial => "schedule" %>
         </div>
         <div role="tabpanel" class="tab-pane" id="cntGantt">
             <%= render :partial => "gantt" %>
         </div>
-        <div role="tabpanel" class="tab-pane" id="cntCalendar">
+        <!-- <div role="tabpanel" class="tab-pane" id="cntCalendar">
             <%= render :partial => "calendar" %>
-        </div>
+        </div> -->
     </div>
 </section>

@@ -6,14 +6,26 @@
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">Nombre</label>
                 <div class="col-sm-10">
-                    <%= text_field_tag 'name', @business.name, class: 'form-control', placeholder: 'Nombre' %>
+                    <%= text_field_tag 'business[name]', @business.name, class: 'form-control', placeholder: 'Nombre' %>
                 </div>
             </div>
             <div class="form-group">
                 <label for="picture" class="col-sm-2 control-label">Logo</label>
                 <div class="col-sm-10">
                     <img src="/logos/<%= @business.logo %>" id="preview-picture">
-                    <%= file_field_tag 'picture', class: 'picture-field'%>
+                    <%= file_field_tag 'business[picture]', class: 'picture-field'%>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="business[color1]" class="col-sm-2 control-label">Color 1</label>
+                <div class="col-sm-10">
+                    <%= text_field_tag 'business[color1]', @business.color1, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="business[color2]" class="col-sm-2 control-label">Color 2</label>
+                <div class="col-sm-10">
+                    <%= text_field_tag 'business[color1]', @business.color2, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
                 </div>
             </div>
             <%= hidden_field_tag 'id', @business.id %>

@@ -10,7 +10,7 @@ class TicketController < ApplicationController
         @tickets = @pagination.get_records
     	@business = Business.where('id = ?', @user.business_id).first
     	@priorities = Priority.where('state = (1)::bit(1)')
-        @categories = Category.categories_for @user.business_id
+        @categories = @business.categories
     end
     def create
     	data = params[:ticket]

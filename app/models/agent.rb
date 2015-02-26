@@ -4,6 +4,18 @@ class Agent < ActiveRecord::Base
   has_many :businesses_agent
   before_save :set_defaults
 
+  def initialize
+    super()
+  end
+  def initialize(data)
+    super()
+    if data[:appointment_id] != nil
+      self.appointment_id = data[:appointment_id]
+    end
+    self.first_name = data[:first_name]
+    self.last_name = data[:last_name]
+
+  end
   def no_tickets
   	return self.tickets_agent.count
   end

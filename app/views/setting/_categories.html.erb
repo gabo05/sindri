@@ -1,0 +1,15 @@
+<fieldset>
+	<div class="alert alert-info" role="alert">
+		<h4>Seleccione las categor&iacute;as que desea gestionar para esta organizaci&oacute;n</h4>
+		<p>Nota: Este paso es opcional, usted puede agregar nuevas categorias o usar las sugeridas despu&eeacute;s de crear su cuenta</p>
+	</div>
+	<div class="checkbox-list">
+		<ul id="categories" class="list-group">
+			<% for category in @categories %>
+				<li class="list-group-item">
+					<label class="checkbox-inline"><input type="checkbox" data-value="<%= category.id %>" class="check-item-category"><%= category.name %></label>
+				</li>
+			<%end%>
+		</ul>
+	</div>
+</fieldset>

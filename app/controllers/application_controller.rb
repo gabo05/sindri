@@ -8,12 +8,16 @@ class ApplicationController < ActionController::Base
     
     private
         def signed_user
-            if session[:user] == nil
+            if session[:user] == nil and session[:agent_id] == nil
                 redirect_to action: 'login', controller: 'account'
-            else
+            elsif session[:user] != nil and session[:new_agent_id] == nil
                 @user = YAML.load(session[:user])
                 if(@user.type == 'agent')
-                    @businesses = YAML.load(session[:businesses])
+                    if(session[:businesses] != nil)
+                        @businesses = YAML.load(session[:businesses])
+                    else
+                        redirect_to action: 'first', controller: 'setting'
+                    end
                 end
             end
         end

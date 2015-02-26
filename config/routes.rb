@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post "account/create"
 
   post "account/signin"
-    
+  
   #Agent Controller Routes
   #GET
   get "agent/index"
@@ -48,7 +48,34 @@ Rails.application.routes.draw do
   post "business/create"
 
   post "business/save"
-    
+
+  #Catalog Controller Routes
+  #GET
+  get "catalog/areas/:page", to: "catalog#areas"
+
+  get "catalog/categories/:page", to: "catalog#categories"
+
+  get "catalog/states/:page", to: "catalog#states"
+
+  get "catalog/area/:id", to: "catalog#areas"
+
+  get "catalog/category/:id", to: "catalog#categories"
+
+  get "catalog/state/:id", to: "catalog#states"
+
+  #POST
+  post "catalog/areas/add", to: "catalog#add_areas"
+
+  post "catalog/categories/add", to: "catalog#add_categories"
+  
+  post "catalog/states/add", to: "catalog#add_states"
+
+  post "catalog/area/create", to: "catalog#create_area"
+
+  post "catalog/category/create", to: "catalog#create_category"
+
+  post "catalog/state/create", to: "catalog#create_state"
+
   #Client Controller Routes
   #GET
   get "client/index"
@@ -94,7 +121,9 @@ Rails.application.routes.draw do
 
   #Setting Controller Routes
   #GET
-  get "setting/index"
+  get "admin/index", to: "setting#index"
+
+  get "admin/first-configuration", to: "setting#first"
 
   #POST
   post "setting/update"

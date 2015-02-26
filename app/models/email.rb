@@ -4,6 +4,14 @@ class Email < ActiveRecord::Base
 
   before_save :set_defaults
 
+  def initialize
+  	super()
+  end
+  def initialize(email, agent)
+    super()
+  	self.agent = agent
+  	self.email = agent
+  end
   private
 	  def set_defaults
 	  	self.state ||= 1

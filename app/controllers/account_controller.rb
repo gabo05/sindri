@@ -12,6 +12,7 @@ class AccountController < ActionController::Base
     end
     
     def register
+        
     end
 
     def confirm
@@ -20,9 +21,8 @@ class AccountController < ActionController::Base
 
         redirect_to url_for(:controller => confirm['data'].type, :action => :edit, :id => confirm['data'].id)
     end
-    
     def create
-        if(user_signup(params[:first_name], params[:last_name], params[:business_name], params[:email], params[:password]))
+        if(user_signup(params[:agent], params[:email], params[:password]))
             flash.keep
             flash[:message] = {'type' => 'success', 'text' => "Su cuenta ha sido creada. Un correo electrónico ha sido enviado a #{params[:email]} para confirmar su cuenta"}
             redirect_to url_for(:controller => :account, :action => :login)

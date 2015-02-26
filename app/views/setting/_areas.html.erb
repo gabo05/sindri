@@ -1,0 +1,17 @@
+<fieldset>
+	<div class="alert alert-info" role="alert">
+		<h4>Seleccione las &aacute;reas que desea gestionar para esta organizaci&oacute;n</h4>
+		<p>Este paso es opcional, usted puede agregar nuevas &aacute;reas o usar las sugeridas despu&eacute;s de crear su cuenta</p>
+	</div>
+	<div class="checkbox-list">
+		<ul id="areas" class="list-group">
+			<% for area in @areas %>
+				<li class="list-group-item">
+					<label class="checkbox-inline">
+						<input type="checkbox" data-value="<%= area.id %>" class="check-item-area"><%= area.name %>
+					</label>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</fieldset>

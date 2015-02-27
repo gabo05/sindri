@@ -31,4 +31,8 @@ module ApplicationHelper
 
 		content_tag(:div, content, class: 'input-group date', id: "dtp_#{name}")
 	end
+	def color_label_tag(color, text = nil)
+		text ||= color
+		content_tag(:span, text, class: 'label', style: "background-color: #{color}")
+	end
 end

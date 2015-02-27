@@ -18,6 +18,7 @@ class CatalogController < ApplicationController
 		if(params[:id] != nil)
 			@category = all_categories.where('id = ?', params[:id])
 		else
+			@areas = Business.areas(user.business_id)
 	        @pagination = Pagination.new params[:page], params[:size], all_categories
 	        @categories = @pagination.get_records
 	    end
@@ -81,5 +82,12 @@ class CatalogController < ApplicationController
 		state = State.new(params[:state])
 		state.save
 		redirect_to url_for controller: "catalog", action: "states"
+	end
+
+	def delete_area
+	end
+	def delete_category
+	end
+	def delete_state
 	end
 end

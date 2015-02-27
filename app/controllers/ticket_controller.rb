@@ -25,18 +25,15 @@ class TicketController < ApplicationController
         @user = YAML.load(session[:user])
         business = Business.where('id = ?', @user.business_id).first
         @agents = business.agents
-
-        state = State.where('"order" = 2 and state = (1)::bit(1)').first
-
-        ts = TicketsState.where('state_id = ? and ticket_id = ?', state.id, @ticket.id )
-
-        if(ts.count == 0 and @user.is_in_role 'admin')
-            ticket_state = TicketsState.new
-            ticket_state.ticket_id = @ticket.id
-            ticket_state.state_id = state.id
-            ticket_state.change_by = @user.user_id
-            ticket_state.save
-        end
+        @states = business.states
+        @state = @ticket.current_state
+        @agent = @ticket.agents.first
+    end
+    def change
+        @user = YAML.load(session[:user])
+        ticket_state = TicketsState.new(params[:ticket_id], params[:state][:id], @user.id)
+        ticket_state.save
+        redirect_to url_for controller: 'ticket', action: 'ticket', id: params[:ticket_id]
     end
     def send_response
         response = TicketsResponse.new
@@ -52,7 +49,7 @@ class TicketController < ApplicationController
 
         asignament = TicketsAgent.new
         asignament.ticket_id = params[:ticket_id]
-        asignament.agent_id = params[:agent_id]
+        asignament.agent_id = params[:agent][:id]
         
         if asignament.save
             state = State.where('"order" = 3 and state = (1)::bit(1)').first

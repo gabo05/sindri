@@ -34,6 +34,7 @@ class Business < ActiveRecord::Base
 	end
 
 	#Catalogs
+	#Areas
 	def self.areas id
 		areas_id = BusinessesArea.where('state = (1)::bit(1) and business_id = ?', id).collect{ |a| a.area_id }
 		areas = Area.where('id in (?) and state = (1)::bit(1)', areas_id)
@@ -42,6 +43,7 @@ class Business < ActiveRecord::Base
 	def areas
 		return Business.areas(self.id)
 	end
+	#States
 	def self.states id
 		states_id = BusinessesState.where('state = (1)::bit(1) and business_id = ?', id).collect{ |a| a.state_id }
 		states = State.where('id in (?) and state = (1)::bit(1)', states_id)
@@ -50,13 +52,14 @@ class Business < ActiveRecord::Base
 	def states
 		return Business.states(self.id)
 	end
+	#Categories
 	def self.categories id
 		categories_id = AreasCategory.where('state = (1)::bit(1) and business_id = ?', id).collect{ |a| a.category_id }
 		categories = Category.where('id in (?) and state = (1)::bit(1)', categories_id)
 		return categories
 	end
-	def states
-		return Business.states(self.id)
+	def categories
+		return Business.categories(self.id)
 	end
 	private
       def set_defaults

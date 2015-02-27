@@ -63,6 +63,13 @@ Rails.application.routes.draw do
 
   get "catalog/state/:id", to: "catalog#states"
 
+  #DELETE
+  delete "catalog/delete_area/:id", to: "catalog#delete_area"
+
+  delete "catalog/delete_category/:id", to: "catalog#delete_category"
+
+  delete "catalog/delete_state/:id", to: "catalog#delete_state"
+
   #POST
   post "catalog/areas/add", to: "catalog#add_areas"
 
@@ -155,6 +162,8 @@ Rails.application.routes.draw do
   post "ticket/send_response"
 
   post "ticket/asign"
+
+  post "ticket/change"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -20,6 +20,7 @@ Rails.application.config.assets.precompile += %w( lib/jquery.steps.css )
 Rails.application.config.assets.precompile += %w( unsignup.css )
 Rails.application.config.assets.precompile += %w( scheldule.css )
 Rails.application.config.assets.precompile += %w( client.css )
+Rails.application.config.assets.precompile += %w( ticket.css )
 
 #js
 #Libraries

@@ -27,4 +27,8 @@ class Ticket < ActiveRecord::Base
     result = self.agents.where('id = ?', agent.id)
     return result.count > 0
   end
+  def history_state
+    tickets_states = TicketsState.where('ticket_id = ?', self.id)
+    return tickets_states
+  end
 end

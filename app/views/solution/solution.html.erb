@@ -40,7 +40,7 @@
                     <% end %>
                 </ul>
                 <% end %>
-                <% if @user.is_in_role? 'client'%>
+                <% if @user.is_in_role? 'agent' or @user.is_in_role? 'admin' or @user.is_in_role?('ticket_admin')%>
                 <%= form_tag  url_for(:controller => :solution, :action => :acept), method: 'post', class: 'form-horizontal', role: 'form' do %>
                     <%= hidden_field_tag "ticket_id", @ticket.id %>
                     <%= hidden_field_tag "solution_id", solution.id %>

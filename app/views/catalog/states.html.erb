@@ -1,0 +1,79 @@
+<section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
+    <h1>Areas</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr class="info">
+                    <td>Nombre</td>
+                    <td>Descripci&oacute;n</td>
+                    <td>Color</td>
+                    <td>Orden</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% if @states.count == 0 %>
+                <tr>
+                    <td colspan="4">No hay registros que mostrar</td>
+                </tr>
+                <% else
+                    for state in @states %>
+                    <tr>
+                        <td><%= state.name %></td>
+                        <td><%= state.description %></td>
+                        <td><%= color_label_tag state.color %></td>
+                        <td><%= state.order %></td>
+                        <td>
+                            <div class="btn-group">
+                                <% if not state.is_suggested %>
+                                <a href="<%=url_for controller: "catalog", action: "states", id: state.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
+                                <a href="<%=url_for controller: "catalog", action: "delete_state", id: state.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
+                                <% end %>
+                            </div>
+                        </td>
+                    </tr>
+                <% end 
+                end%>
+            </tbody>
+        </table>
+    </div>
+    <% if @states.count > 0 %>
+    <%= pagination_tag @pagination, "catalog", "states" %>
+    <% end %>
+    <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
+        <%= render :partial => "shared/message" %>
+        <%= form_tag url_for(:controller => :catalog, :action => :create_state), method: 'post', class: 'form-horizontal', role: 'form' do %>
+            <fieldset>
+                <legend>Nueva Area</legend>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Nombre</label>
+                    <div class="col-sm-10">
+                        <%= text_field_tag 'state[name]', nil, class: 'form-control', placeholder: 'Nombre' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                    <div class="col-sm-10">
+                        <%= text_field_tag 'state[description]', nil, class: 'form-control', placeholder: 'Descripción' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                    <div class="col-sm-10">
+                        <%= number_field_tag 'order', nil, class: 'form-control', placeholder: '0' %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Color</label>
+                    <div class="col-sm-10">
+                        <%= text_field_tag 'state[color]', nil, class: 'form-control minicolors-input', placeholder: '#fff' %>
+                    </div>
+                </div>
+                <div class="form-group pull-right">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <%= submit_tag "Guardar", class: 'btn btn-primary btn-lg' %>
+                    </div>
+                </div>
+            </fieldset>
+        <% end %>
+    </div>
+</section>

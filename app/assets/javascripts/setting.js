@@ -23,10 +23,6 @@ var initialize = function(){
 	    }
 
 	});
-	//Initialize jQuery Minicolors
-	$('.minicolors-input').minicolors({
-		position: 'bottom right'
-	});
 }
 var validateOrganization = function(){
 	bn = $('#business_name');

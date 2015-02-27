@@ -11,9 +11,14 @@
 // about supported directives.
 //
 $(document).on('ready', function(){
+	//Initialize jQuery Datepicker
 	$('.date').datetimepicker({
         format: 'DD/MM/YYYY'
     });
+    //Initialize jQuery Minicolors
+	$('.minicolors-input').minicolors({
+		position: 'bottom right'
+	});
 	if(typeof initialize === 'function')
     	initialize();
 });

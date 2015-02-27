@@ -94,7 +94,7 @@
                             <% end %>
                             <li><%= link_to "Reportes", controller: "report", action: "index" %></li>
                             <% if @user.is_in_role? 'admin' %>
-                                <li><%= link_to "Configuración", controller: "setting", action: "index" %></li>
+                                <li><%= link_to "Administración", controller: "setting", action: "index" %></li>
                             <% end %>
                             <li><%= link_to "Acerca de...", controller: "home", action: "about" %></li>
                         </ul>

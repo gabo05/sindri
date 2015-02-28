@@ -26,9 +26,10 @@ test:
 
 production:
   adapter: postgresql
-  database: sindri
-  host: localhost
-  username: postgres
-  password: Av5sgy
+  database: d5s6n77bh8scdh
+  host: ec2-23-21-231-14.compute-1.amazonaws.com
+  port: 5432  
+  username: lrrboqfmluairu
+  password: OedSpblRg4T1gQeLsLNul7mAHX
   pool: 5
   timeout: 5000

@@ -16,6 +16,6 @@ function showPopover(input, message){
 		content: message
 	});
 }
-function applyInputStyle(input, class){
-	input.parent().parent().addClass('has-'+class);
+function applyInputStyle(input, class_name){
+	input.parent().parent().addClass('has-'+class_name);
 }

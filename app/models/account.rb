@@ -3,13 +3,13 @@ class Account < ActiveRecord::Base
     has_many :accounts_role
     before_save :set_defaults
 
-    def initialize
-        super()    
-    end
-    def initialize(email, password, picture = 'avatar_default.png')
+    def initialize(email = nil, password = nil, picture = 'avatar_default.png')
         super()
-        self.email = email
-        self.passsword = password
+        if email != nil and password != nil
+            self.email = email
+            self.passsword = password
+            self.picture = picture
+        end
     end
     def full_name
         if is_agent?

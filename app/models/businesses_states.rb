@@ -2,12 +2,11 @@ class BusinessesState < ActiveRecord::Base
 	belongs_to :business
 	belongs_to :state
 
-	def initialize
+	def initialize(state_id = nil, business_id = nil)
 		super()
-	end
-	def initialize(state_id, business_id)
-		super()
-		self.state_id = state_id
-		self.business_id = business_id
+		if state_id != nil and business_id != nil
+			self.state_id = state_id
+			self.business_id = business_id
+		end
 	end
 end

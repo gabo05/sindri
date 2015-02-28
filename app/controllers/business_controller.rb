@@ -13,37 +13,45 @@ class BusinessController < ApplicationController
 
     end
   	def create
-	  	business = Business.new(params[:business])
-		if business.save
-			business_agent = BusinessesAgent.new
-			business_agent.business = business
-		  	if(request.xhr?)
-		  		business_agent.agent_id = session[:new_agent_id]
-		  		session[:new_agent_id] = nil
-		  		business_agent.save
-		  		render :json => { :status => 'OK', :id => business.id, :name=>business.name }
-		  	else
-		  		if params[:picture] != nil
-			        uploaded_io = params[:picture]
-			        upload_file_to(uploaded_io, Rails.root.join('public', 'logos', uploaded_io.original_filename))
-			        business.logo = uploaded_io.original_filename
-			    end
-			    user = YAML.load(session[:user])
-				business_agent.agent_id = user.id
+	  	user = YAML.load(session[:user])
+		
+	  	if(request.xhr?)
+	  		business = Business.new(params)
+	  		if business.save
+	  			user.business = business
+		  		session[:user] = user.to_yaml
+		  		session[:businesses] = Business.where(:id => business.id).to_yaml
+
+				business_agent = BusinessesAgent.new(business.id, user.id)
+	  			business_agent.save
+			end
+	  		render :json => { :status => 'OK', :id => business.id, :name=>business.name }
+	  	else
+	  		business = Business.new(params[:business])
+	  		if params[:picture] != nil
+		        uploaded_io = params[:picture]
+		        upload_file_to(uploaded_io, Rails.root.join('public', 'logos', uploaded_io.original_filename))
+		        business.logo = uploaded_io.original_filename
+		    end
+		    if business.save
+			    business_agent = BusinessesAgent.new(business.id, user.id)
 				business_agent.save
-				redirect_to url_for controller: "business", action: "index"
-		  	end
-		end
+				businesses_agent = BusinessesAgent.where('agent_id = ?', user.id)
+				session[:businesses] = Business.where(:id => businesses_agent.select(:business_id)).to_yaml
+			end
+			
+			redirect_to url_for controller: "business", action: "index"
+	  	end
 	end
 	def edit
-		@business = Business.where('id = ? and state = true', params[:id]).first
+		@business = Business.where('id = ? and state = (1)::bit(1)', params[:id]).first
 		@agents = Agent.all
 	end
 	def save
-		business = Business.where('id = ? and state = true', params[:id]).first
+		business = Business.where('id = ? and state = (1)::bit(1)', params[:id]).first
 		business.name = params[:business][:name]
 		
-		if params[:picture] != nil
+		if params[:business][:picture] != nil
 	        uploaded_io = params[:business][:picture]
 	        upload_file_to(uploaded_io, Rails.root.join('public', 'logos', uploaded_io.original_filename))
 	        business.logo = uploaded_io.original_filename

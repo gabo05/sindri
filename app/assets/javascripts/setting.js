@@ -23,9 +23,12 @@ var initialize = function(){
 	    }
 
 	});
+	$('.minicolors-input').minicolors({
+		position: 'bottom right'
+	});
 }
 var validateOrganization = function(){
-	bn = $('#business_name');
+	bn = $('#name');
 	if(isEmpty(bn)){
 		showValidationMessage(bn);
 		return false;
@@ -33,7 +36,7 @@ var validateOrganization = function(){
 
 	return true;
 }
-var submitInitConfig() = function(){
+var submitInitConfig = function(){
 	if(validateOrganization()){
 		$('#organization-form').submit();
 	}
@@ -46,17 +49,16 @@ var after_save_org = function(org){
 	areas.each(function(index){
 		ids.push($(this).data('value'));
 	});
-
+	var d = {areas_id: ids.join('_'), business_id: org.id };
 	$.ajax({
-		type: 'POST',
-		url: '/catalog/areas/add',
-		data: {data: JSON.stringify(ids), business_id: org.id },
-		dataType: 'json',
-		contentType: 'application/json'
+		type: 'GET',
+		url: '/catalog/add_areas',
+		data: d,
+		dataType: 'json'
 	}).done(function(result){
 		after_save_areas(result);
 	}).fail(function(jqXHR, textStatus, errorThrow){
-		console.log(textStatus);
+		console.error(textStatus);
 	});
 }
 var after_save_areas = function(org){
@@ -68,15 +70,14 @@ var after_save_areas = function(org){
 	});
 
 	$.ajax({
-		type: 'POST',
-		url: '/catalog/categories/add',
-		data: {data: JSON.stringify(ids), business_id: org.id},
+		type: 'GET',
+		url: '/catalog/add_categories',
+		data: {categories_id: ids.join('_'), business_id: org.id},
 		dataType: 'json',
-		contentType: 'application/json'
 	}).done(function(result){
 		if(result.status == 'OK')
 			window.location = '/home/index/'+result.id;
 	}).fail(function(jqXHR, textStatus, errorThrow){
-		console.log(textStatus);
+		console.error(textStatus);
 	});
 }

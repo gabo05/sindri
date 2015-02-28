@@ -1,20 +1,18 @@
-<section class="center col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	<div class="panel panel-info">
-        <div class="panel-heading">
-            <b>Solución #<%= @solution.id %></b>
-        </div>
-        <div class="panel-body">
-            <h4><b>Creada por:</b> <%= @solution.proposed_by(@ticket_id).full_name %></h4>
-            <h4><b>Descripci&oacute;n</b></h4>
-            <p><%= @solution.description %></p>
-            <% if @solution.attachments.count > 0 %>
-            <h5>Adjuntos</h5>
-            <ul>
-                <% for attachment in @solution.attachments %>
-                <li><a href="/attachments/<%= attachment.name %>"><%= attachment.name %></a></li>
-                <% end %>
-            </ul>
-            <% end %>
-        </div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <b>Solución #<%= @solution.id %></b>
     </div>
-</section>
+    <div class="panel-body">
+        <h4><b>Creada por:</b> <%= @solution.proposed_by(@ticket_id).full_name %></h4>
+        <h4><b>Descripci&oacute;n</b></h4>
+        <p><%= @solution.description %></p>
+        <% if @solution.attachments.count > 0 %>
+        <h5>Adjuntos</h5>
+        <ul>
+            <% for attachment in @solution.attachments %>
+            <li><a href="/attachments/<%= attachment.name %>"><%= attachment.name %></a></li>
+            <% end %>
+        </ul>
+        <% end %>
+    </div>
+</div>

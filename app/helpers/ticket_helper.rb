@@ -17,23 +17,15 @@ module TicketHelper
         user = YAML.load(session[:user])
         
         #Create the ticket
-        ticket = Ticket.new
+        ticket = Ticket.new(data)
         
-        ticket.title = data[:title]
-        ticket.description = data[:description]
         ticket.client_id = user.id
-        ticket.priority_id = data[:priority_id]
-        ticket.expire_at = params[:expire_at].to_date
         ticket.business_id = user.business_id
 
         if ticket.save
             #Set the state to Open
             state = State.where('"order" = 1 and state = (1)::bit(1)').first
-            ticket_state = TicketsState.new
-            ticket_state.ticket = ticket
-            ticket_state.state = state
-            ticket_state.is_current = 1
-            ticket_state.change_by = user.user_id
+            ticket_state = TicketsState.new(ticket.id, state.id, user.id)
             ticket_state.save 
             #Save the attachments
             if(attachments != nil)
@@ -52,9 +44,7 @@ module TicketHelper
                 end
             end
             #save the category
-            ticket_category = TicketsCategory.new
-            ticket_category.category_id = data[:category_id]
-            ticket_category.ticket_id = ticket.id
+            ticket_category = TicketsCategory.new(ticket.id, data[:category_id])
             ticket_category.save
         end
     end

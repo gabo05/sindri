@@ -1,69 +1,37 @@
-<div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-    <%= render :partial => "shared/message" %>
-    <%= form_tag url_for(:controller => :business, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
-        <fieldset>
-            <legend>Organizaci&oacute;n</legend>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Nombre</label>
-                <div class="col-sm-10">
-                    <%= text_field_tag 'business[name]', @business.name, class: 'form-control', placeholder: 'Nombre' %>
-                </div>
+<%= render :partial => "shared/message" %>
+<%= form_tag url_for(:controller => :business, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
+    <fieldset>
+        <legend>Organizaci&oacute;n</legend>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">Nombre</label>
+            <div class="col-sm-10">
+                <%= text_field_tag 'business[name]', @business.name, class: 'form-control', placeholder: 'Nombre' %>
             </div>
-            <div class="form-group">
-                <label for="picture" class="col-sm-2 control-label">Logo</label>
-                <div class="col-sm-10">
-                    <img src="/logos/<%= @business.logo %>" id="preview-picture">
-                    <%= file_field_tag 'business[picture]', class: 'picture-field'%>
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="picture" class="col-sm-2 control-label">Logo</label>
+            <div class="col-sm-10">
+                <img src="/logos/<%= @business.logo %>" id="preview-picture" data-file="business_picture">
+                <%= file_field_tag 'business[picture]', class: 'picture-field'%>
             </div>
-            <div class="form-group">
-                <label for="business[color1]" class="col-sm-2 control-label">Color 1</label>
-                <div class="col-sm-10">
-                    <%= text_field_tag 'business[color1]', @business.color1, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="business[color1]" class="col-sm-2 control-label">Color 1</label>
+            <div class="col-sm-10">
+                <%= text_field_tag 'business[color1]', @business.color1, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
             </div>
-            <div class="form-group">
-                <label for="business[color2]" class="col-sm-2 control-label">Color 2</label>
-                <div class="col-sm-10">
-                    <%= text_field_tag 'business[color1]', @business.color2, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
-                </div>
+        </div>
+        <div class="form-group">
+            <label for="business[color2]" class="col-sm-2 control-label">Color 2</label>
+            <div class="col-sm-10">
+                <%= text_field_tag 'business[color2]', @business.color2, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
             </div>
-            <%= hidden_field_tag 'id', @business.id %>
-            <div class="form-group pull-right">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <%= submit_tag "Guardar", class: 'btn btn-primary btn-lg' %>
-                </div>
+        </div>
+        <%= hidden_field_tag 'id', @business.id %>
+        <div class="form-group pull-right">
+            <div class="col-sm-10">
+                <%= submit_tag "Guardar", class: 'btn btn-primary btn-lg' %>
             </div>
-        </fieldset>
-    <% end %>
-    <table class="table table-hover">
-        <thead>
-            <tr class="info">
-                <td>Nombre</td>
-                <td>Acciones</td>
-            </tr>
-        </thead>
-        <tbody>
-            <% if @agents.count == 0 %>
-            <tr>
-                <td colspan="4">No hay registros que mostrar</td>
-            </tr>
-            <% else
-                for agent in @agents %>
-                <tr>
-                    <td><%= agent.full_name %></td>
-                    <td col-span="2">
-                        <div class="btn-group">
-                        	<% if @business.belongs?(agent.id) %>
-                            <a href="<%=url_for controller: "business", action: "remove_agent", business_id: @business.id, agent_id: agent.id %>" class="btn btn-default" title="Remover" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
-                            <% else %>
-                            <a href="<%=url_for controller: "business", action: "add_agent", business_id: @business.id, agent_id: agent.id %>" class="btn btn-default" title="Agregar" rel="tooltip"><i class=" glyphicon glyphicon-plus"></i></a>
-                            <% end %>
-                        </div>
-                    </td>
-                </tr>
-            <% end 
-            end%>
-        </tbody>
-    </table>
-</div>
+        </div>
+    </fieldset>
+<% end %>

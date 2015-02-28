@@ -71,17 +71,17 @@ Rails.application.routes.draw do
   delete "catalog/delete_state/:id", to: "catalog#delete_state"
 
   #POST
-  post "catalog/areas/add", to: "catalog#add_areas"
+  get "catalog/add_areas"
 
-  post "catalog/categories/add", to: "catalog#add_categories"
+  get "catalog/add_categories"
   
-  post "catalog/states/add", to: "catalog#add_states"
+  get "catalog/add_states"
 
-  post "catalog/area/create", to: "catalog#create_area"
+  post "catalog/create/area", to: "catalog#create_area"
 
-  post "catalog/category/create", to: "catalog#create_category"
+  post "catalog/create/category", to: "catalog#create_category"
 
-  post "catalog/state/create", to: "catalog#create_state"
+  post "catalog/create/state", to: "catalog#create_state"
 
   #Client Controller Routes
   #GET

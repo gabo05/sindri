@@ -1,115 +1,113 @@
-<section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-    <h1>Tickets</h1>
-    <div class="row">
-        <div class="col-lg-4 pull-right">
-            <select class="form-control">
-                <% for state in State.all %>
-                <option value="<%= state.id %>"><%= state.name %></option>
-                <% end %>
-            </select>
-        </div>
+<h1>Tickets</h1>
+<div class="row">
+    <div class="col-lg-4 pull-right">
+        <select class="form-control">
+            <% for state in State.all %>
+            <option value="<%= state.id %>"><%= state.name %></option>
+            <% end %>
+        </select>
     </div>
-    <br>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr class="info">
-                    <td>Titulo</td>
-                    <td>Creada</td>
-                    <td>Asignada</td>
-                    <td>Emitida</td>
-                    <td>Vence</td>
-                    <td>Categoria</td>
-                    <td>Estado</td>
-                    <td>Acciones</td>
-                </tr>
-            </thead>
-            <tbody>
-                <% if @tickets.count > 0%>
-                <% for ticket in @tickets %>
-                    <tr>
-                        <td><%= ticket.title %></td>
-                        <td><%= ticket.client.full_name %></td>
-                        <td><%= ticket.agents.collect { |a| a.full_name }.join(', ') %></td>
-                        <td><%= ticket.created_at.strftime "%d/%m/%Y" %></td>
-                        <td><%= ticket.expire_at %></td>
-                        <td><%= ticket.categories.collect{ |c| c.name }.join(',') %></td>
-                        <td>
-                            <span class="label label-<%= ticket.current_state.css_class %>"><%= ticket.current_state.name %></span>
-                        </td>
-                        <td>
-                            <div class="btn-group">
-                                <a href="<%=url_for controller: "ticket", action: "ticket", id: ticket.id %>" class="btn btn-default" title="Contestar" rel="tooltip">
-                                    <i class="glyphicon glyphicon-envelope"></i>
-                                </a>
-                                <a href="<%=url_for controller: "solution", action: "solution", id: ticket.id %>" class="btn btn-default" title="Resolver" rel="tooltip">
-                                    <i class="glyphicon glyphicon-thumbs-up"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                <%  end 
-                    end%>
-                <% if @tickets.count <= 0%>
+</div>
+<br>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="info">
+                <td>Titulo</td>
+                <td>Creada</td>
+                <td>Asignada</td>
+                <td>Emitida</td>
+                <td>Vence</td>
+                <td>Categoria</td>
+                <td>Estado</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% if @tickets.count > 0%>
+            <% for ticket in @tickets %>
                 <tr>
-                    <td colspan = "6">No hay registros que mostrar</td>
+                    <td><%= ticket.title %></td>
+                    <td><%= ticket.client.full_name %></td>
+                    <td><%= ticket.agents.collect { |a| a.full_name }.join(', ') %></td>
+                    <td><%= ticket.created_at.strftime "%d/%m/%Y" %></td>
+                    <td><%= ticket.expire_at %></td>
+                    <td><%= ticket.categories.collect{ |c| c.name }.join(',') %></td>
+                    <td>
+                        <span class="label label-<%= ticket.current_state.css_class %>"><%= ticket.current_state.name %></span>
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a href="<%=url_for controller: "ticket", action: "ticket", id: ticket.id %>" class="btn btn-default" title="Contestar" rel="tooltip">
+                                <i class="glyphicon glyphicon-envelope"></i>
+                            </a>
+                            <a href="<%=url_for controller: "solution", action: "solution", id: ticket.id %>" class="btn btn-default" title="Resolver" rel="tooltip">
+                                <i class="glyphicon glyphicon-thumbs-up"></i>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
-                <% end %>
-            </tbody>
-        </table>
-    </div>
-    <% if @tickets.count > 0 %>
-    <%= pagination_tag @pagination, "ticket", "index" %>
+            <%  end 
+                end%>
+            <% if @tickets.count <= 0%>
+            <tr>
+                <td colspan = "6">No hay registros que mostrar</td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<% if @tickets.count > 0 %>
+<%= pagination_tag @pagination, "ticket", "index" %>
+<% end %>
+<% if @user.is_in_role? 'client'%>
+<div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
+    <%= render :partial => "shared/message" %>
+    <%= form_for :ticket, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form',  :multipart => true} do |f| %>
+        <fieldset>
+            <legend>Nueva Ticket</legend>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">T&iacute;tulo</label>
+                <div class="col-sm-10">
+                    <%= f.text_field :title, :class=>'form-control', :placeholder => 'Título' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                <div class="col-sm-10">
+                    <%= f.text_area :description, :class=>'form-control', :placeholder => 'Descripción', :rows => '4' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Prioridad</label>
+                <div class="col-sm-10">
+                    <%= select "ticket", "priority_id", @priorities.collect{ |p| [p.name, p.id] }, {}, {:class => 'form-control'} %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Categoria</label>
+                <div class="col-sm-10">
+                    <%= select "ticket", "category_id", @categories.collect{ |c| [c.name, c.id] }, {}, {:class => 'form-control'} %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Fecha de Vencimiento</label>
+                <div class="col-sm-10">
+                    <%= date_picker_tag 'ticket[expire_at]', nil %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Adjuntos</label>
+                <div class="col-sm-10">
+                    <%= file_field_tag "attachments[]", multiple: true %>
+                </div>
+            </div>
+            <div class="form-group pull-right">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <%= f.submit :class => 'btn btn-primary btn-lg', :value => 'Crear' %>
+                </div>
+            </div>
+        </fieldset>
     <% end %>
-    <% if @user.is_in_role? 'client'%>
-    <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-        <%= render :partial => "shared/message" %>
-        <%= form_for :ticket, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form',  :multipart => true} do |f| %>
-            <fieldset>
-                <legend>Nueva Ticket</legend>
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">T&iacute;tulo</label>
-                    <div class="col-sm-10">
-                        <%= f.text_field :title, :class=>'form-control', :placeholder => 'Título' %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Descripci&oacute;n</label>
-                    <div class="col-sm-10">
-                        <%= f.text_area :description, :class=>'form-control', :placeholder => 'Descripción', :rows => '4' %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Prioridad</label>
-                    <div class="col-sm-10">
-                        <%= select "ticket", "priority_id", @priorities.collect{ |p| [p.name, p.id] }, {}, {:class => 'form-control'} %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Categoria</label>
-                    <div class="col-sm-10">
-                        <%= select "ticket", "category_id", @categories.collect{ |c| [c.name, c.id] }, {}, {:class => 'form-control'} %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Fecha de Vencimiento</label>
-                    <div class="col-sm-10">
-                        <%= date_picker_tag 'expire_at', nil %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Adjuntos</label>
-                    <div class="col-sm-10">
-                        <%= file_field_tag "attachments[]", multiple: true %>
-                    </div>
-                </div>
-                <div class="form-group pull-right">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <%= f.submit :class => 'btn btn-primary btn-lg', :value => 'Crear' %>
-                    </div>
-                </div>
-            </fieldset>
-        <% end %>
-    </div>
-    <% end %>
-</section>
+</div>
+<% end %>

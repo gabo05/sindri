@@ -5,17 +5,37 @@ class ApplicationController < ActionController::Base
 	
     protect_from_forgery
     before_filter :signed_user
-    
+
+    protected
+        def allowed_whitout_business 
+         [
+            { :controller => 'setting', :action => 'first' },
+            { :controller => 'business', :action => 'create' },
+            { :controller => 'catalog', :action => 'add_areas' },
+            { :controller => 'catalog', :action => 'add_categories' },
+            { :controller => 'catalog', :action => 'add_states' }
+        ]
+        end
     private
+        def is_allowed_wb? controller, action
+            for awb in allowed_whitout_business
+                if awb[:controller] == controller and awb[:action] == action
+                    return true
+                end
+            end
+            return false
+        end
         def signed_user
-            if session[:user] == nil and session[:agent_id] == nil
+            if session[:user] == nil
                 redirect_to action: 'login', controller: 'account'
-            elsif session[:user] != nil and session[:new_agent_id] == nil
+            end
+
+            if session[:user] != nil
                 @user = YAML.load(session[:user])
                 if(@user.type == 'agent')
                     if(session[:businesses] != nil)
                         @businesses = YAML.load(session[:businesses])
-                    else
+                    elsif not is_allowed_wb?(params[:controller], params[:action])
                         redirect_to action: 'first', controller: 'setting'
                     end
                 end

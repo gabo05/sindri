@@ -4,13 +4,12 @@ class Email < ActiveRecord::Base
 
   before_save :set_defaults
 
-  def initialize
-  	super()
-  end
-  def initialize(email, agent)
+  def initialize(email=nil, agent=nil)
     super()
-  	self.agent = agent
-  	self.email = agent
+    if email != nil and agent != nil
+    	self.agent = agent
+    	self.email = email
+    end
   end
   private
 	  def set_defaults

@@ -1,11 +1,10 @@
 class Area < ActiveRecord::Base
-	def initialize
+	def initialize(data = nil)
 		super()
-	end
-	def initialize(data)
-		super()
-		self.name = data[:name]
-		self.description = data[:description]
+		if data != nil
+			self.name = data[:name]
+			self.description = data[:description]
+		end
 	end
 	def area
 		agents_id = AgentsArea.where('area_id = ? and state = (1)::bit(1)', self.id).collect{ |aa| aa.agent_id }

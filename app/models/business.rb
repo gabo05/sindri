@@ -3,14 +3,13 @@ class Business < ActiveRecord::Base
 	has_many :businesses_agent
 	before_save :set_defaults
 
-	def initialize
+	def initialize(data = nil)
 		super()
-	end
-	def initialize(data)
-		super()
-		self.name = data[:name]
-		self.color1 = data[:color1]
-		self.color2 = data[:color2]
+		if data != nil
+			self.name = data[:name]
+			self.color1 = data[:color1]
+			self.color2 = data[:color2]
+		end
 	end
 	def self.agents id
 		agents_id = BusinessesAgent.where('business_id = ?', id).collect{ |ba| ba.agent_id }
@@ -54,7 +53,8 @@ class Business < ActiveRecord::Base
 	end
 	#Categories
 	def self.categories id
-		categories_id = AreasCategory.where('state = (1)::bit(1) and business_id = ?', id).collect{ |a| a.category_id }
+		ba_id = BusinessesArea.where('state = (1)::bit(1) and business_id = ?', id).collect{ |a| a.id }
+		categories_id = AreasCategory.where('state = (1)::bit(1) and businesses_area_id in (?)', ba_id).collect{ |ac| ac.category_id }
 		categories = Category.where('id in (?) and state = (1)::bit(1)', categories_id)
 		return categories
 	end

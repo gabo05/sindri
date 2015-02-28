@@ -2,13 +2,13 @@ class AccountsRole < ActiveRecord::Base
 	belongs_to :account
 	belongs_to :role
 	before_save :set_defaults
-	def initialize
+	
+	def initialize(account = nil, role = nil)
 		super()
-	end
-	def initialize(account, role)
-		super()
-		self.account = account
-		self.role = role
+		if account != nil and role != nil
+			self.account = account
+			self.role = role
+		end
 	end
 	private
       def set_defaults

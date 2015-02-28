@@ -1,9 +1,6 @@
 .soueidan-nav-container, .soueidan-nav-container *{
     box-sizing: border-box;
 }
-body{
-    height:100%;
-}
 .soueidan-nav-container h1{
     font-size:1em;
     text-align:center;
@@ -24,7 +21,8 @@ body{
 .soueidan-nav-container li{
     height:50px; 
     position:relative;
-    background-color: #0e83cd;
+    background-color: #04519b;
+    margin-bottom: 4px;
 }
 .soueidan-nav-container a {
     text-decoration:none;
@@ -32,19 +30,21 @@ body{
     height:100%;
     width:100%;
     line-height:50px;
-    color:#fff;
+    color: #fff;
     text-transform: uppercase;
     font-weight: bold;
     padding-left:25%;
-    border-left:5px solid transparent;
+    /*border-left:5px solid transparent;*/
+    border-left: solid 5px #222;
     letter-spacing:1px;
     transition: all 0.3s linear;
 }
 .soueidan-active a,
-li:not(.active):hover a{
+.soueidan-nav-container li:not(.active):hover a{
     border-left:8px solid #fff/*#eaeaea*/;
-    background-color: #47a3da/*#3BAFDA*/;
+    background-color: #022f5a/*#3BAFDA*/;
     outline:0;
+    color:#fff;
 }
 .soueidan-nav-container span[class ^= "icon"]{
     position:absolute;

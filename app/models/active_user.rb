@@ -18,9 +18,11 @@ class ActiveUser
 			@type = user.type
 			@full_name = user.full_name
 			@user_id = user.id
-			self.business_id = business.id
-			self.business_name = business.name
-			self.business_logo = business.logo
+			if(business != nil)
+				self.business_id = business.id
+				self.business_name = business.name
+				self.business_logo = business.logo
+			end
 			@roles = roles
 		end
 		def business=(business)

@@ -1,41 +1,39 @@
-<section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#cntScheldule" role="tab" data-toggle="tab"><h4>Detalles</h4></a></li>
-        <li role="presentation"><a href="#cntGantt" id="dgantt" role="tab" data-toggle="tab"><h4>Historial</h4></a></li>
-    </ul>
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="cntScheldule">
-            <%= render :partial => "ticket" %>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="cntGantt">
-            <%= render :partial => "history" %>
-        </div>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#cntScheldule" role="tab" data-toggle="tab"><h4>Detalles</h4></a></li>
+    <li role="presentation"><a href="#cntGantt" id="dgantt" role="tab" data-toggle="tab"><h4>Historial</h4></a></li>
+</ul>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="cntScheldule">
+        <%= render :partial => "ticket" %>
     </div>
-	<div class="col-lg-12 col-md-12 col-sm-12 col-md-12">
-        <% for response in @responses %>
-        <div class="panel panel-info">
-			<div class="panel-body">
-				<h4><%= response.account.full_name %></h4>
-				<p><%= response.text %></p>
-			</div>
+    <div role="tabpanel" class="tab-pane" id="cntGantt">
+        <%= render :partial => "history" %>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-md-12">
+    <% for response in @responses %>
+    <div class="panel panel-info">
+		<div class="panel-body">
+			<h4><%= response.account.full_name %></h4>
+			<p><%= response.text %></p>
 		</div>
-        <% end %>
-        <%= form_for :tickets_response, :url => { :controller => "ticket", :action => "send_response" }, :html => {:class=>'form-horizontal', :role=>'form' } do |f| %>
-        	<fieldset>
-        		<legend>Enviar Mensaje</legend>
-        		<div class="form-group">
-                    <div class="col-sm-10">
-                        <%= f.text_area :text, :class=>'form-control', :placeholder => 'Mensaje', :rows => '5' %>
-                    </div>
+	</div>
+    <% end %>
+    <%= form_for :tickets_response, :url => { :controller => "ticket", :action => "send_response" }, :html => {:class=>'form-horizontal', :role=>'form' } do |f| %>
+    	<fieldset>
+    		<legend>Enviar Mensaje</legend>
+    		<div class="form-group">
+                <div class="col-sm-10">
+                    <%= f.text_area :text, :class=>'form-control', :placeholder => 'Mensaje', :rows => '5' %>
                 </div>
-                <%= f.hidden_field :account_id, :value => @user.user_id %>
-                <%= f.hidden_field :ticket_id, :value => @ticket.id %>
-                <div class="form-group pull-right">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <%= f.submit :class => 'btn btn-primary btn-lg', :value => 'Enviar' %>
-                    </div>
+            </div>
+            <%= f.hidden_field :account_id, :value => @user.user_id %>
+            <%= f.hidden_field :ticket_id, :value => @ticket.id %>
+            <div class="form-group pull-right">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <%= f.submit :class => 'btn btn-primary btn-lg', :value => 'Enviar' %>
                 </div>
-        	</fieldset>
-        <% end %>
-    </div>
-</section>
+            </div>
+    	</fieldset>
+    <% end %>
+</div>

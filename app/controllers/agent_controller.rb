@@ -6,11 +6,11 @@ class AgentController < ApplicationController
         all_agents = Business.agents(user.business_id)
         @pagination = Pagination.new params[:page], params[:size], all_agents
         @agents = @pagination.get_records
-        @appointments = Appointment.all
     end
     
     def invite
-    	invite_agent(params[:first_name], params[:last_name], params[:email])
+        user = YAML.load(session[:user])
+    	invite_agent(params[:first_name], params[:last_name], params[:email], user.business_id)
         flash[:message] = {'type'=>"info",'text' => "Una invitación ha sido enviada a #{params[:email]} para confirmar su cuenta"}
         redirect_to url_for controller: 'agent', action: 'index'
     end
@@ -18,18 +18,24 @@ class AgentController < ApplicationController
         redirect_to url_for controller: 'agent', action: 'index'
     end
     def edit
+        user = YAML.load(session[:user])
     	@agent = Agent.find_by id: params[:id]
         @email = Email.where('agent_id = ? and state = (1)::bit(1)', @agent.id).first
     	@account = Account.find_by email_id: @email.id
         @appointments = Appointment.all
+        @areas = Business.areas(user.business_id)
     end
     def save
         agent = Agent.find_by id: params[:agent_id]
         
         agent.first_name = params[:first_name]
         agent.last_name = params[:last_name]
+        agent.appointment_id = params[:appointment_id]
         agent.save
         
+        agent_area = AgentsArea.new agent.id, params[:area_id]
+        agent_area.save
+
         email = Email.where('agent_id = ? and state = (1)::bit(1)', agent.id).first
         account = Account.find_by email_id: email.id
 

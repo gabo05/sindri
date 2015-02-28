@@ -36,28 +36,18 @@ class TicketController < ApplicationController
         redirect_to url_for controller: 'ticket', action: 'ticket', id: params[:ticket_id]
     end
     def send_response
-        response = TicketsResponse.new
         data = params[:tickets_response]
-        response.ticket_id = data[:ticket_id]
-        response.account_id = data[:account_id]
-        response.text = data[:text]
+        response = TicketsResponse.new data
         response.save
         redirect_to url_for controller: 'ticket', action: 'ticket', id: data[:ticket_id]
     end
     def asign
         user = YAML.load(session[:user])
-
-        asignament = TicketsAgent.new
-        asignament.ticket_id = params[:ticket_id]
-        asignament.agent_id = params[:agent][:id]
+        asignament = TicketsAgent.new params[:ticket_id], params[:agent][:id]
         
         if asignament.save
             state = State.where('"order" = 3 and state = (1)::bit(1)').first
-
-            ticket_state = TicketsState.new
-            ticket_state.ticket_id = params[:ticket_id]
-            ticket_state.state_id = state.id
-            ticket_state.change_by = user.user_id
+            ticket_state = TicketsState.new(params[:ticket_id], state.id, user.id)
             ticket_state.save
         end
         redirect_to url_for controller: 'ticket', action: 'ticket', id: params[:ticket_id]

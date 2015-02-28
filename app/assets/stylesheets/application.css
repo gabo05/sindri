@@ -24,6 +24,12 @@ header img{
 header h1, header img{
 	float: left;
 }
+.sindri-business-name{
+    color: #000;
+}
+.sindri-business-name:hover{
+    text-decoration: none;
+}
 .sindri-user > li > a{
 	font-size: 1.5em;
 	margin-top: 10px;

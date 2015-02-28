@@ -37,7 +37,7 @@ class CatalogController < ApplicationController
 	end
 
 	def add_areas
-		areas_id = JSON.parse params[:data]
+		areas_id = params[:areas_id].split('_')
 		business_id = params[:business_id]
 		for area_id in areas_id
 			business_area = BusinessesArea.new(area_id, business_id)
@@ -47,7 +47,7 @@ class CatalogController < ApplicationController
 	end
 
 	def add_categories
-		categories_id = JSON.parse params[:data]
+		categories_id = params[:categories_id].split('_')
 		business_id = params[:business_id]
 		for category_id in categories_id
 			business_category = AreasCategory.new(category_id, business_id)
@@ -57,7 +57,7 @@ class CatalogController < ApplicationController
 	end
 
 	def add_states
-		states_id = JSON.parse params[:data]
+		states_id = params[:states_id].split('_')
 		business_id = params[:business_id]
 		for state_id in states_id
 			business_state = BusinessesState.new(state_id, business_id)

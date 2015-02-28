@@ -1,80 +1,77 @@
-<section class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-    <h1>Organizaciones</h1>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr class="info">
-                    <td>Nombre</td>
-                    <td>Logo</td>
-                    <td>No de Clientes</td>
-                    <td>No de Agentes</td>
-                    <td>Acciones</td>
-                </tr>
-            </thead>
-            <tbody>
-                <% if @businesses.count == 0 %>
+<h1>Organizaciones</h1>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="info">
+                <td>Nombre</td>
+                <td>Logo</td>
+                <td>No de Clientes</td>
+                <td>No de Agentes</td>
+                <td>Acciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% if @businesses.count == 0 %>
+            <tr>
+                <td colspan="4">No hay registros que mostrar</td>
+            </tr>
+            <% else
+                for business in @businesses %>
                 <tr>
-                    <td colspan="4">No hay registros que mostrar</td>
+                    <td><%= business.name %></td>
+                    <td><img src="/logos/<%= business.logo %>"/></td>
+                    <td><%= business.clients.count %></td>
+                    <td><%= business.agents.count %></td>
+                    <td col-span="2">
+                        <div class="btn-group">
+                            <a href="<%=url_for controller: "business", action: "edit", id: business.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a href="<%=url_for controller: "business", action: "delete", id: business.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
+                        </div>
+                    </td>
                 </tr>
-                <% else
-                    for business in @businesses %>
-                    <tr>
-                        <td><%= business.name %></td>
-                        <td><img src="/logos/<%= business.logo %>"/></td>
-                        <td><%= business.clients.count %></td>
-                        <td><%= business.agents.count %></td>
-                        <td col-span="2">
-                            <div class="btn-group">
-                                <a href="<%=url_for controller: "business", action: "edit", id: business.id %>" class="btn btn-default" title="Editar" rel="tooltip"><i class="glyphicon glyphicon-pencil"></i></a>
-                                <a href="<%=url_for controller: "business", action: "delete", id: business.id %>" class="btn btn-default" title="Eliminar" rel="tooltip"><i class="glyphicon glyphicon-trash"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                <% end 
-                end%>
-            </tbody>
-        </table>
-    </div>
-    <% if @businesses.count > 0 %>
-        <%= pagination_tag @pagination, "business", "index" %>
+            <% end 
+            end%>
+        </tbody>
+    </table>
+</div>
+<% if @businesses.count > 0 %>
+    <%= pagination_tag @pagination, "business", "index" %>
+<% end %>
+<div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
+    <%= render :partial => "shared/message" %>
+    <%= form_tag url_for(:controller => :business, :action => :create), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
+        <fieldset>
+            <legend>Nueva Organizaci&oacute;n</legend>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Nombre</label>
+                <div class="col-sm-10">
+                    <%= text_field_tag 'business[name]', nil, class: 'form-control', placeholder: 'Nombre' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="picture" class="col-sm-2 control-label">Logo</label>
+                <div class="col-sm-10">
+                    <img src="/logos/default.png" id="preview-picture">
+                    <%= file_field_tag 'business[picture]', class: 'picture-field'%>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="business[color1]" class="col-sm-2 control-label">Color 1</label>
+                <div class="col-sm-10">
+                    <%= text_field_tag 'business[color1]', nil, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="business[color2]" class="col-sm-2 control-label">Color 2</label>
+                <div class="col-sm-10">
+                    <%= text_field_tag 'business[color1]', nil, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
+                </div>
+            </div>
+            <div class="form-group pull-right">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <%= submit_tag "Crear", class: 'btn btn-primary btn-lg' %>
+                </div>
+            </div>
+        </fieldset>
     <% end %>
-    <div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-        <%= render :partial => "shared/message" %>
-        <%= form_tag url_for(:controller => :business, :action => :create), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
-            <fieldset>
-                <legend>Nueva Organizaci&oacute;n</legend>
-                <div class="form-group">
-                    <label for="password" class="col-sm-2 control-label">Nombre</label>
-                    <div class="col-sm-10">
-                        <%= text_field_tag 'business[name]', nil, class: 'form-control', placeholder: 'Nombre' %>
-                    </div>
-                </div>
-                <div class="form-group">
-	                <label for="picture" class="col-sm-2 control-label">Logo</label>
-	                <div class="col-sm-10">
-	                    <img src="/logos/default.png" id="preview-picture">
-	                    <%= file_field_tag 'business[picture]', class: 'picture-field'%>
-	                </div>
-	            </div>
-                <div class="form-group">
-                    <label for="business[color1]" class="col-sm-2 control-label">Color 1</label>
-                    <div class="col-sm-10">
-                        <%= text_field_tag 'business[color1]', nil, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="business[color2]" class="col-sm-2 control-label">Color 2</label>
-                    <div class="col-sm-10">
-                        <%= text_field_tag 'business[color1]', nil, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
-                    </div>
-                </div>
-                <div class="form-group pull-right">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <%= submit_tag "Crear", class: 'btn btn-primary btn-lg' %>
-                    </div>
-                </div>
-            </fieldset>
-        <% end %>
-    </div>
-</section>
-
+</div>

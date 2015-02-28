@@ -16,6 +16,7 @@ Rails.application.config.assets.precompile += %w( lib/bootstrap-datetimepicker.m
 Rails.application.config.assets.precompile += %w( lib/gantt.css )
 Rails.application.config.assets.precompile += %w( lib/jquery.minicolors.css )
 Rails.application.config.assets.precompile += %w( lib/jquery.steps.css )
+Rails.application.config.assets.precompile += %w( lib/soueidan-sidenav.css )
 #Views
 Rails.application.config.assets.precompile += %w( unsignup.css )
 Rails.application.config.assets.precompile += %w( scheldule.css )
@@ -39,12 +40,14 @@ Rails.application.config.assets.precompile += %w( lib/jquery.minicolors.min.js )
 Rails.application.config.assets.precompile += %w( form.ajax.js )
 Rails.application.config.assets.precompile += %w( common.js )
 Rails.application.config.assets.precompile += %w( agent.js )
+Rails.application.config.assets.precompile += %w( client.js )
 Rails.application.config.assets.precompile += %w( scheldule.js )
 Rails.application.config.assets.precompile += %w( setting.js )
 Rails.application.config.assets.precompile += %w( image_upload.js )
 Rails.application.config.assets.precompile += %w( solution.js )
 Rails.application.config.assets.precompile += %w( unsignup.js )
 Rails.application.config.assets.precompile += %w( register.js )
+Rails.application.config.assets.precompile += %w( business.js )
 
 #Sources
 #jQuery Gantt http://taitems.github.io/jQuery.Gantt/

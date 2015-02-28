@@ -26,10 +26,10 @@ test:
 
 production:
   adapter: postgresql
-  database: d5s6n77bh8scdh
-  host: ec2-23-21-231-14.compute-1.amazonaws.com
+  database: d3mbq6ji53l7ko
+  host: ec2-23-23-180-133.compute-1.amazonaws.com
   port: 5432  
-  username: lrrboqfmluairu
-  password: OedSpblRg4T1gQeLsLNul7mAHX
+  username: tctaprivohagcd
+  password: r6d1W98yZeSclttFnzxv7iI2uA
   pool: 5
   timeout: 5000

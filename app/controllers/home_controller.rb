@@ -5,10 +5,15 @@ class HomeController < ApplicationController
 	    if params[:id] != nil
 	    	switch_business params[:id]
 	    end
-      	
-      	@user = YAML.load(session[:user])
 
-	    all_tickets = get_tickets_for(@user)
+      all_tickets = get_tickets_for(@user)
+
+      if params[:ticket_id] != nil
+        all_tickets = Ticket.where('id = ?', params[:ticket_id])
+      end
+      @user = YAML.load(session[:user])
+
+	    
 	    @pagination = Pagination.new params[:page], 6, all_tickets
 
 	    @tickets = @pagination.get_records

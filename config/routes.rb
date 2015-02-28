@@ -112,6 +112,14 @@ Rails.application.routes.draw do
   #GET
   get "report/index"
 
+  get "report/tickets/agent/:id", to: "report#tickets_agents"
+
+  get "report/tickets/client/:id", to: "report#tickets_agents"
+
+  get "report/tickets/category/:id", to: "report#tickets_categories"
+
+  get "report/tickets/state/:id", to: "report#tickets_states"
+
   #POST
 
   #Schedule Controller Routes

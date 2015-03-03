@@ -12,6 +12,7 @@ class Agent < ActiveRecord::Base
       end
       self.first_name = data[:first_name]
       self.last_name = data[:last_name]
+      @area_id ||= 1
     end
   end
   def no_tickets

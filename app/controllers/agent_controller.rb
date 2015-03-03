@@ -24,6 +24,7 @@ class AgentController < ApplicationController
     	@account = Account.find_by email_id: @email.id
         @appointments = Appointment.all
         @areas = Business.areas(user.business_id)
+        @agent_area = AgentsArea.where('agent_id = ?', @agent.id)
     end
     def save
         agent = Agent.find_by id: params[:agent_id]
@@ -33,8 +34,8 @@ class AgentController < ApplicationController
         agent.appointment_id = params[:appointment_id]
         agent.save
         
-        agent_area = AgentsArea.new agent.id, params[:area_id]
-        agent_area.save
+        # agent_area = AgentsArea.new agent.id, params[:area_id]
+        # agent_area.save
 
         email = Email.where('agent_id = ? and state = (1)::bit(1)', agent.id).first
         account = Account.find_by email_id: email.id

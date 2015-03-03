@@ -1,31 +1,35 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="form-horizontal col-lg-10 col-md-10 center" role="form">
-    <div class="input-group" >
-        <input type="text" id="key" class="form-control" placeholder="# Ticket">
-        <div class = "input-group-btn">
-            <button id="search" class="btn btn-primary">
-                <i class="glyphicon glyphicon-search"></i>Buscar
-            </button>
-        </div>    
+        <div class="input-group" >
+            <input type="text" id="key" class="form-control" placeholder="# Ticket">
+            <div class = "input-group-btn">
+                <button id="search" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-search"></i>Buscar
+                </button>
+            </div>      
+        </div>
     </div>
-</div>
-    <% if tickets.count == 0%>
-    <div class="alert alert-danger">
-        <h3><strong>No results</strong></h3>
-    </div>
-    <% end %>
-    <% for ticket in @tickets%>
-    <div class="col-lg-4 col-md-4 col-sm-6 col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <a href="<%=url_for controller: "solution", action: "solution", id: ticket.id %>" title="Ver" rel="tooltip">
-                    <b>Ticket #<%= ticket.id %></b> 
-                </a>
-                <span class="label label-<%=ticket.current_state.css_class%> pull-right"><%= ticket.current_state.name %></span></div>
-            <div class="panel-body">
-                <h5><b>Creada por:</b> <%= ticket.client.full_name %></h5>
-                <h5><b>Descripci&oacute;n</b></h5>
-                <p><%= ticket.description %></p>
+    <% if @tickets.count == 0%>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="alert alert-danger">
+            <h3><strong>No results</strong></h3>
+        </div>
+        <% end %>
+        <% for ticket in @tickets%>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a href="<%=url_for controller: "solution", action: "solution", id: ticket.id %>" title="Ver" rel="tooltip">
+                        <b>Ticket #<%= ticket.id %></b> 
+                    </a>
+                    <span class="label pull-right" style="background-color: <%=ticket.current_state.color %>"><%= ticket.current_state.name %></span></div>
+                <div class="panel-body">
+                    <h5><b>Creada en:</b> <%= ticket.created_at %></h5>
+                    <h5><b>Creada por:</b> <%= ticket.client.full_name %></h5>
+                    <h5><b>Asignada a:</b> <%= ticket.agents.collect{ |a| a.full_name }.join(',') %></h5>
+                    <h5><b>Descripci&oacute;n</b></h5>
+                    <p><%= ticket.description %></p>
+                </div>
             </div>
         </div>
     </div>

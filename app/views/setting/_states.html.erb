@@ -1,0 +1,63 @@
+<fieldset class="form-horizontal">
+	<div class="well">
+		<h4>Registrar estados</h4>
+		<p>Usted puede usar los estados propuestos para llevar a cabo el proceso de la gesti&oacute;n de incidencias o puede definir sus propios estados</p>
+	</div>
+	<div class="radio">
+		<label>
+			<input type="radio" name="suggested" id="optionsRadios2" value="suggested" checked>
+			Usar estados sugeridos
+		</label>
+	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sc_suggested">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="checkbox-list">
+				<ul id="states" class="list-group">
+					<% for state in @suggested_states1 %>
+						<li class="list-group-item">
+							<label class="checkbox-inline"><input type="checkbox" checked disabled data-value="<%= state.id %>" class="check-item-state"><%= state.name %></label>
+						</li>
+					<%end%>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="checkbox-list">
+				<ul id="states" class="list-group">
+					<% for state in @suggested_states2 %>
+						<li class="list-group-item">
+							<label class="checkbox-inline"><input type="checkbox" checked disabled data-value="<%= state.id %>" class="check-item-state"><%= state.name %></label>
+						</li>
+					<%end%>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="radio">
+		<label>
+			<input type="radio" name="suggested" id="optionsRadios1" value="custom">
+			Definir estados propios
+		</label>
+	</div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="sc_custom" style="display:none">
+		<h3>Estado Inicial</h3>
+		<div class="form-group">
+	        <label for="st_name" class="col-sm-2 control-label">Nombre</label>
+	        <div class="col-sm-10">
+	            <%= text_field_tag 'st_name', nil, class: 'form-control', placeholder: 'Nombre' %>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="st_description" class="col-sm-2 control-label">Descripci&oacute;n</label>
+	        <div class="col-sm-10">
+	            <%= text_area_tag 'st_description', nil, class: 'form-control', placeholder: 'Escriba la descripción del estado aquí' %>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="st_color" class="col-sm-2 control-label">Color</label>
+	        <div class="col-sm-10">
+	            <%= text_field_tag 'st_color', nil, class: 'form-control minicolors-input', placeholder: '#ffffff' %>
+	        </div>
+	    </div>
+	</div>
+</fieldset>

@@ -45,11 +45,8 @@ class TicketController < ApplicationController
         user = YAML.load(session[:user])
         asignament = TicketsAgent.new params[:ticket_id], params[:agent][:id]
         
-        if asignament.save
-            state = State.where('"order" = 3 and state = (1)::bit(1)').first
-            ticket_state = TicketsState.new(params[:ticket_id], state.id, user.id)
-            ticket_state.save
-        end
+        asignament.save
+        
         redirect_to url_for controller: 'ticket', action: 'ticket', id: params[:ticket_id]
     end
 end

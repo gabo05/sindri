@@ -11,10 +11,11 @@ function showValidationMessage(input, message){
 	showPopover(input, message);
 }
 function showPopover(input, message){
-	input.focus().popover({
-		html: true,
-		content: message
-	});
+	input.focus()
+		.popover({
+			html: true,
+			content: message
+		});
 }
 function applyInputStyle(input, class_name){
 	input.parent().parent().addClass('has-'+class_name);

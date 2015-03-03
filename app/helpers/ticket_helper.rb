@@ -25,7 +25,7 @@ module TicketHelper
         if ticket.save
             #Set the state to Open
             state = State.where('"order" = 1 and state = (1)::bit(1)').first
-            ticket_state = TicketsState.new(ticket.id, state.id, user.id)
+            ticket_state = TicketsState.new(ticket.id, state.id, nil, user.id)
             ticket_state.save 
             #Save the attachments
             if(attachments != nil)

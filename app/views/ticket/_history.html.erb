@@ -1,0 +1,9 @@
+<ul class="history-list">
+	<% for ts in @ticket.history_state %>
+	<li style="border-color: <%=ts.state.color%>">
+		<h5><strong>Estado:</strong> <%= color_label_tag ts.state.color, ts.state.name %></h5>
+		<h5><strong>Resgistrado:</strong><%= ts.created_at %></h5>
+		<h5><strong>Por:</strong><%= ts.agent != nil ? ts.agent.full_name : ts.client.full_name %></h5>
+	</li>
+	<% end %>
+</ul>

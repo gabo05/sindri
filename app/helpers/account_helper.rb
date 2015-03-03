@@ -58,12 +58,12 @@ module AccountHelper
         if user.is_agent?
             businesses_agent = BusinessesAgent.where('agent_id = ? and state = (1)::bit(1)', id).first
             if businesses_agent != nil
-                business = Business.where('id = ? and state = true', businesses_agent.business_id).first
-                session[:businesses] = Business.where(:id => businesses_agent.select(:business_id)).to_yaml
+                business = Business.where('id = ? and state = (1)::bit(1)', businesses_agent.business_id).first
+                session[:businesses] = Business.where(:id => businesses_agent.business_id).to_yaml
             end
         else
             client = Client.where('id = ? and state = (1)::bit(1)', id).first
-            business = Business.where('id = ? and state = true', client.business_id).first
+            business = Business.where('id = ? and state = (1)::bit(1)', client.business_id).first
         end
         #Load roles
         roles_id = AccountsRole.where('account_id = ?', user.id).collect{ |ar| ar.role_id }

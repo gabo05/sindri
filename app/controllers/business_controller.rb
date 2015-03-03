@@ -17,6 +17,7 @@ class BusinessController < ApplicationController
 		
 	  	if(request.xhr?)
 	  		business = Business.new(params)
+	  		business.logo = 'default.png'
 	  		if business.save
 	  			user.business = business
 		  		session[:user] = user.to_yaml

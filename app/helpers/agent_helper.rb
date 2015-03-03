@@ -44,7 +44,7 @@ module AgentHelper
         business_agent.business_id = business_id
         business_agent.agent = agent
         business_agent.save
-
+        
         return true
 	end
     def get_agents

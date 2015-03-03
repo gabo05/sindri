@@ -4,8 +4,10 @@ class BusinessesState < ActiveRecord::Base
 
 	def initialize(state_id = nil, business_id = nil)
 		super()
-		if state_id != nil and business_id != nil
+		if state_id != nil
 			self.state_id = state_id
+		end
+		if business_id != nil
 			self.business_id = business_id
 		end
 	end

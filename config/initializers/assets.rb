@@ -36,7 +36,7 @@ Rails.application.config.assets.precompile += %w( lib/bootstrap-datetimepicker.m
 Rails.application.config.assets.precompile += %w( lib/jquery.fn.gantt.js )
 Rails.application.config.assets.precompile += %w( lib/jquery.steps.min.js )
 Rails.application.config.assets.precompile += %w( lib/jquery.minicolors.min.js )
-Rails.application.config.assets.precompile += %w( lib/jquery.table.js )
+Rails.application.config.assets.precompile += %w( lib/jquery.table.min.js )
 #Controllers Scripts
 Rails.application.config.assets.precompile += %w( form.ajax.js )
 Rails.application.config.assets.precompile += %w( common.js )

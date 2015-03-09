@@ -1,36 +1,31 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="center col-lg-10 col-md-10 col-sm-10 col-xs-12">
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "ticktsagente.png", :alt => "", :title => "Tickets por Agente"%>
-            <a class="sindri-mh-item">Tickets por Agente</a>
+    <fieldset>
+        <legend>Reportes</legend>
+        <div class="center col-lg-10 col-md-10 col-sm-10 col-xs-12">
+            <div class="sindri-menu-home col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                <%= image_tag "reporte.png", :alt => "", :title => "Tickets por Agente"%>
+                <h4><a href="<%= url_for controller: 'report', action: 'tickets_agents' %>" class="sindri-mh-item">Tickets por Agente</a></h4>
+            </div>
+            <div class="sindri-menu-home col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                <%= image_tag "reporte.png", :alt => "", :title => "Tickets por Cliente"%>
+                <h4><a href="<%= url_for controller: 'report', action: 'tickets_clients' %>" class="sindri-mh-item">Tickets por Cliente</a></h4>
+            </div>
+            <div class="sindri-menu-home col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                <%= image_tag "reporte.png", :alt => "", :title => "Tickets por Estado"%>
+                <h4><a href="<%= url_for controller: 'report', action: 'tickets_states' %>" class="sindri-mh-item">Tickets por Estado</a></h4>
+            </div>
+            <div class="sindri-menu-home col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                <%= image_tag "reporte.png", :alt => "", :title => "Tickets por Categoria"%>
+                <h4><a href="<%= url_for controller: 'report', action: 'tickets_categories' %>" class="sindri-mh-item">Tickets por Categoria</a></h4>
+            </div>
+            <div class="sindri-menu-home col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                <%= image_tag "reporte.png", :alt => "", :title => "Resolucion de Tickets por Agente"%>
+                <h4><a href="<%= url_for controller: 'report', action: 'solutions_agents' %>" class="sindri-mh-item">Resoluci&oacute;n de Tickets por Agente</a></h4>
+            </div>
+            <div class="sindri-menu-home col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                <%= image_tag "reporte.png", :alt => "", :title => "Tiempo de Resolucion de Tickets por Agente"%>
+                <h4><a href="<%= url_for controller: 'report', action: 'time_solutions_agents' %>" class="sindri-mh-item">Tiempo de Resoluci&oacute;n de Tickets por Agente</a></h4>
+            </div>
         </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "ticketscliente.png", :alt => "", :title => "Tickets por Cliente"%>
-            <a class="sindri-mh-item">Tickets por Cliente</a>
-        </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "ticketscategoria.png", :alt => "", :title => "Tickets por Categoria"%>
-            <a class="sindri-mh-item">Tickets por Categor&iacute;a</a>
-        </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "ticketsgrupo.png", :alt => "", :title => "Tickets por Grupo"%>
-            <a class="sindri-mh-item">Tickets por Grupo</a>
-        </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "resolucionticketsagente.png", :alt => "", :title => "Resolucion de Tickets por Agente"%>
-            <a class="sindri-mh-item">Resoluci&oacute;n de Tickets por Agente</a>
-        </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "generacionticketscliente.png", :alt => "", :title => "Generacion de Tickets por Cliente"%>
-            <a class="sindri-mh-item">Generaci&oacute;n de Tickets por Cliente</a>
-        </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "tiempoatencion.png", :alt => "", :title => "Tiempo de Atencion de Incidencias por Agente"%>
-            <a class="sindri-mh-item">Tiempo de Atenci&oacute;n de Incidencias por Agente</a>
-        </div>
-        <div class="sindri-menu-home col-lg-2 col-md-3 col-sm-6 col-xs-12">
-            <%= image_tag "ticketsclienteagente.png", :alt => "", :title => "Tickets por Cliente por Agente"%>
-            <a class="sindri-mh-item">Tickets por Cliente por Agente</a>
-        </div>
-    </div>
+    </fieldset>
 </div>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "account/login"
 
   get "account/logout"
-
+  # get "report/get_result"
   #POST
   post "account/create"
 
@@ -114,19 +114,27 @@ Rails.application.routes.draw do
 
   get "report/tickets/agent/:id", to: "report#tickets_agents"
 
-  get "report/tickets/client/:id", to: "report#tickets_agents"
+  get "report/tickets/client/:id", to: "report#tickets_clients"
 
   get "report/tickets/category/:id", to: "report#tickets_categories"
 
   get "report/tickets/state/:id", to: "report#tickets_states"
 
+  get "report/solutions/agents/:id", to: "report#solutions_agents"
+
+  get "report/solutions/interval/:id", to: "report#time_solutions_agents"
+
   get "report/tickets/agent", to: "report#tickets_agents"
 
-  get "report/tickets/client", to: "report#tickets_agents"
+  get "report/tickets/client", to: "report#tickets_clients"
 
   get "report/tickets/category", to: "report#tickets_categories"
 
   get "report/tickets/state", to: "report#tickets_states"
+
+  get "report/solutions/agents", to: "report#solutions_agents"
+
+  get "report/solutions/interval", to: "report#time_solutions_agents"
 
   #POST
 

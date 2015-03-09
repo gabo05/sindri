@@ -69,7 +69,7 @@ class SolutionController < ApplicationController
     			ticket_state = TicketsState.new
 	    		ticket_state.state = state
 	    		ticket_state.ticket_id = params[:ticket_id]
-	    		ticket_state.change_by = user.id
+	    		ticket_state.agent_id = user.id
 	    		ticket_state.save
     		end
     	end

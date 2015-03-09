@@ -5,7 +5,7 @@ $(document).on('submit', 'form[data-ajax="true"]', function(e){
 	var data = form.serialize();
 
 	$.ajax({
-		type: 'POST',
+		type: form.attr('method'),
 		url: form.attr('action'),
 		data: data,
 		dataType: form.data('type')

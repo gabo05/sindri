@@ -46,6 +46,7 @@ module TicketHelper
             #save the category
             ticket_category = TicketsCategory.new(ticket.id, data[:category_id])
             ticket_category.save
+            NotificationMailer.created_ticket(ticket.id, user.business_id).deliver
         end
     end
 end

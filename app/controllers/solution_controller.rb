@@ -64,13 +64,8 @@ class SolutionController < ApplicationController
     		ticket_solution.agent_id = user.id
     		ticket_solution.acepted = 0
     		if ticket_solution.save
-    			#Change ticket state
-    			state = State.where('"order" = 4 and state = (1)::bit(1)').first
-    			ticket_state = TicketsState.new
-	    		ticket_state.state = state
-	    		ticket_state.ticket_id = params[:ticket_id]
-	    		ticket_state.agent_id = user.id
-	    		ticket_state.save
+                ticket = Ticket.where('id = ?', params[:ticket_id]).first
+                NotificationMailer.solved_ticket(ticket.client_id, ticket.id).deliver
     		end
     	end
     	redirect_to url_for controller: 'solution', action: 'solution', id: params[:ticket_id]

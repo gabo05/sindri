@@ -98,6 +98,12 @@ Rails.application.routes.draw do
 
   post "client/save"
 
+  #Evaluation Controller Routes
+  #GET
+  get "evaluation/index/:id", to: "evaluation#index"
+
+  #POST
+  post "evaluation/save"
   #Home Controller Routes
   #GET
   get "home/index"

@@ -7,7 +7,7 @@ development:
   adapter: postgresql
   database: sindri
   host: localhost
-  username: postgres
+  username: sindri
   password: Av5sgy
   pool: 5
   timeout: 5000
@@ -19,7 +19,7 @@ test:
   adapter: postgresql
   database: sindri
   host: localhost
-  username: postgres
+  username: sindri
   password: Av5sgy
   pool: 5
   timeout: 5000

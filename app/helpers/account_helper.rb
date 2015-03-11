@@ -21,7 +21,7 @@ module AccountHelper
                     account_role = AccountsRole.new(user, role)
                     account_role.save
                     #Send the email confirmation
-                    AccountMailer.confirm_account(user, email.email).deliver
+                    InvitationMailer.confirm_account(user, email.email).deliver
                     return true
                 end
             end

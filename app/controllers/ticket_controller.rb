@@ -47,6 +47,7 @@ class TicketController < ApplicationController
         
         asignament.save
         
+        NotificationMailer.asigned_ticket(params[:ticket_id], params[:agent][:id]).deliver
         redirect_to url_for controller: 'ticket', action: 'ticket', id: params[:ticket_id]
     end
 end

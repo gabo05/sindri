@@ -21,6 +21,14 @@ class Business < ActiveRecord::Base
 	def agents
 		return Business.agents(self.id)
 	end
+	def self.administrator id
+		
+		query = "select * from fnGetBusinessAdministrator(#{id})"
+		
+		agent = Agent.connection.execute(query, :skip_logging)
+
+		return agent
+	end
 	def self.clients id
 		return Client.where('business_id = ? and state = (1)::bit(1)', id)
 	end

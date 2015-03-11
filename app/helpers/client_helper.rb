@@ -31,7 +31,7 @@ module ClientHelper
                     account_role.role = role
                     account_role.account = user
                     account_role.save
-                    AgentMailer::agent_invitation(email.email, user).deliver
+                    InvitationMailer::send_invitation(email.email, user).deliver
                     return true
                 end
             end

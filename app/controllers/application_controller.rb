@@ -32,6 +32,13 @@ class ApplicationController < ActionController::Base
 
             if session[:user] != nil
                 @user = YAML.load(session[:user])
+
+                query = "SELECT * from fnverifypermission(#{@user.user_id},'#{params[:controller]}','#{params[:action]}');"
+                result = ActiveRecord::Base.connection.exec_query(query)
+
+                if result.rows[0][2] != params[:controller] or result.rows[0][3] != params[:action]
+                    redirect_to action: 'denied', controller: 'home'
+                end
                 if(@user.type == 'agent')
                     if(session[:businesses] != nil)
                         @businesses = YAML.load(session[:businesses])

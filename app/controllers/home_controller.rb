@@ -2,8 +2,8 @@ class HomeController < ApplicationController
     include HomeHelper
     include TicketHelper
     def index
-	    if params[:id] != nil
-	    	switch_business params[:id]
+	    if params[:bid] != nil
+	    	switch_business params[:bid]
 	    end
 
       all_tickets = get_tickets_for(@user)
@@ -21,5 +21,6 @@ class HomeController < ApplicationController
     
     def about
     end
-    
+    def denied
+    end 
 end

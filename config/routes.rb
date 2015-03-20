@@ -116,9 +116,11 @@ Rails.application.routes.draw do
   #GET
   get "home/index"
 
-  get "home/index/:id", to: "home#index"
+  get "home/index/:bid", to: "home#index"
     
   get "home/about"
+
+  get "denied/access", to: "home#denied"
 
   #POST
 

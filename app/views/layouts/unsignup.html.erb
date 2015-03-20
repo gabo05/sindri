@@ -2,19 +2,18 @@
 <html>
 	<head>
 	  <title>Sindri - Helpdesk</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%= favicon_link_tag 'favicon.png' %>
         <%= stylesheet_link_tag    "lib/bootstrap.min", :media => "all" %>
-        <%= stylesheet_link_tag    "lib/bootstrap-theme.min", :media => "all" %>
+        <%= stylesheet_link_tag    "template/bootstrap-reset", :media => "all" %>
+        <%= stylesheet_link_tag    "template/style", :media => "all" %>
+        <%= stylesheet_link_tag    "template/style-responsive", :media => "all" %>
         <%= stylesheet_link_tag    "unsignup", :media => "all" %>
         <%= render :partial => "styles" %>
         <%= csrf_meta_tags %>
 	</head>
-	<body>
+	<body class="login-body">
 		<div class="container">
-			<div class="jumbotron">
-                <h1>Sindri Helpdesk</h1>
-                <p>Bienvenido a Sindri, la mejor experiencia en helpdesk</p>
-            </div>
 			<%= yield %>
 		</div>
 		<%= javascript_include_tag "lib/jquery.min" %>

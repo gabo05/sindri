@@ -1,16 +1,30 @@
-<ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#cntScheldule" role="tab" data-toggle="tab"><h4>Cronograma</h4></a></li>
-    <li role="presentation"><a href="#cntGantt" id="dgantt" role="tab" data-toggle="tab"><h4>Diagrama de Gantt</h4></a></li>
-    <!-- <li role="presentation"><a href="#cntCalendar" role="tab" data-toggle="tab"><h4>Calendario</h4></a></li> -->
-</ul>
-<div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="cntScheldule">
-        <%= render :partial => "schedule" %>
+<section class="panel">
+    <header class="panel-heading tab-bg-dark-navy-blue ">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#cntScheldule" role="tab" data-toggle="tab">
+                    <h4>Cronograma</h4>
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#cntGantt" id="dgantt" role="tab" data-toggle="tab">
+                    <h4>Diagrama de Gantt</h4>
+                </a>
+            </li>
+            <!-- <li role="presentation"><a href="#cntCalendar" role="tab" data-toggle="tab"><h4>Calendario</h4></a></li> -->
+        </ul>
+    </header>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="cntScheldule">
+                <%= render :partial => "schedule" %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cntGantt">
+                <%= render :partial => "gantt" %>
+            </div>
+            <!-- <div role="tabpanel" class="tab-pane" id="cntCalendar">
+                <%= render :partial => "calendar" %>
+            </div> -->
+        </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="cntGantt">
-        <%= render :partial => "gantt" %>
-    </div>
-    <!-- <div role="tabpanel" class="tab-pane" id="cntCalendar">
-        <%= render :partial => "calendar" %>
-    </div> -->
-</div>
+</section>

@@ -3,7 +3,19 @@ class TicketController < ApplicationController
     def index
     	@user = YAML.load(session[:user])
         
+
         all_tickets = get_tickets_for(@user)
+
+
+        if params[:filter] == "1" and params[:ticket_state].to_i != -2 
+            only_state = []
+            for ticket in all_tickets
+                if ticket.current_state.id == params[:ticket_state].to_i
+                    only_state.push ticket.id
+                end
+            end
+            all_tickets = all_tickets.where("id in (?)", only_state)
+        end
 
         @pagination = Pagination.new params[:page], params[:size], all_tickets
         

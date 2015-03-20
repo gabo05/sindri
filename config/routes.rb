@@ -9,11 +9,19 @@ Rails.application.routes.draw do
   get "account/login"
 
   get "account/logout"
+
+  get "account/chpassword"
+
+  get "account/acchpassword"
   # get "report/get_result"
   #POST
   post "account/create"
 
   post "account/signin"
+
+  post "account/chpass", to: "account#change_password"
+
+  post "account/acchpass", to: "account#ac_change_password"
   
   #Agent Controller Routes
   #GET

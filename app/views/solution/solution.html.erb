@@ -1,7 +1,7 @@
-<div class="panel panel-warning">
+<div class="panel">
     <div class="panel-heading">
         <b>Ticket #<%= @ticket.id %></b>
-        <span class="label pull-right" style="<%= @ticket.current_state.color%>"><%= @ticket.current_state.name %></span>
+        <span class="label pull-right" style="background-color:<%= @ticket.current_state.color%>"><%= @ticket.current_state.name %></span>
     </div>
     <div class="panel-body">
         <h4><b>Creada por:</b> <%= @ticket.client.full_name %></h4>
@@ -19,6 +19,45 @@
         <% end %>
     </div>
 </div>
+<% if @user.is_in_role?('admin') or @user.is_in_role?('agent') or @user.is_in_role?('ticket_admin')%>
+    <section class="panel">
+       <header class="panel-heading">
+            <strong>A&ntilde;adir Soluci&oacute;n</strong>
+        </header>
+        <div class="panel-body">
+            <%= render :partial => "shared/message" %>
+            <%= form_for :solution, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form',  :multipart => true} do |f| %>
+                <fieldset>
+                    <legend>Solucion</legend>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">T&iacute;tulo</label>
+                        <div class="col-sm-10">
+                            <%= f.text_field :title, :class=>'form-control', :placeholder => 'Título' %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Descripci&oacute;n</label>
+                        <div class="col-sm-10">
+                            <%= f.text_area :description, :class=>'form-control', :placeholder => 'Descripción', :rows => '4' %>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-sm-2 control-label">Adjuntos</label>
+                        <div class="col-sm-10">
+                            <%= file_field_tag "attachments[]", multiple: true %>
+                        </div>
+                    </div>
+                    <%= hidden_field_tag "ticket_id", @ticket.id %>
+                    <div class="form-group pull-right">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <%= f.submit :class => 'btn btn-primary btn-lg', :value => 'Enviar' %>
+                        </div>
+                    </div>
+                </fieldset>
+            <% end %>
+        </div>
+    </section>
+<% end %>
 <% for solution in @solutions %>
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -26,7 +65,7 @@
             <% if solution.is_acepted_for? @ticket.id %>
             <span class="label label-success pull-right">Aceptada</span>
             <% else %>
-            <span class="label label-danger pull-right">Rechazada</span>
+            <span class="label label-danger pull-right">Sin aprobar</span>
             <% end %>
         </div>
         <div class="panel-body">
@@ -52,38 +91,4 @@
             <% end %>
         </div>
     </div>
-<% end %>
-<% if @user.is_in_role?('admin') or @user.is_in_role?('agent') or @user.is_in_role?('ticket_admin')%>
-<div class="center col-lg-10 col-md-10 col-sm-12 col-xs-12">
-    <%= render :partial => "shared/message" %>
-    <%= form_for :solution, :url => {:action => "create"}, :html => {:class=>'form-horizontal', :role=>'form',  :multipart => true} do |f| %>
-        <fieldset>
-            <legend>Solucion</legend>
-            <div class="form-group">
-                <label for="email" class="col-sm-2 control-label">T&iacute;tulo</label>
-                <div class="col-sm-10">
-                    <%= f.text_field :title, :class=>'form-control', :placeholder => 'Título' %>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Descripci&oacute;n</label>
-                <div class="col-sm-10">
-                    <%= f.text_area :description, :class=>'form-control', :placeholder => 'Descripción', :rows => '4' %>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Adjuntos</label>
-                <div class="col-sm-10">
-                    <%= file_field_tag "attachments[]", multiple: true %>
-                </div>
-            </div>
-            <%= hidden_field_tag "ticket_id", @ticket.id %>
-            <div class="form-group pull-right">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <%= f.submit :class => 'btn btn-primary btn-lg', :value => 'Enviar' %>
-                </div>
-            </div>
-        </fieldset>
-    <% end %>
-</div>
 <% end %>

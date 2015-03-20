@@ -16,14 +16,7 @@ class SolutionController < ApplicationController
     	@user = YAML.load(session[:user])
     	solution = TicketsSolution.where('ticket_id = ? and solution_id = ?', params[:ticket_id], params[:solution_id]).first
     	solution.acepted = 1
-    	if solution.save
-    		state = State.where('"order" = 5 and state = (1)::bit(1)').first
-    		ticket_state = TicketsState.new
-    		ticket_state.state = state
-    		ticket_state.ticket_id = params[:ticket_id]
-    		ticket_state.change_by = @user.id
-    		ticket_state.save
-    	end
+    	solution.save
     	redirect_to url_for controller: 'solution', action: 'solution', id: params[:ticket_id]
     end
     def solution

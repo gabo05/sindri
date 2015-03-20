@@ -48,7 +48,7 @@ class ReportController < ApplicationController
   end
   def solutions_agents
     if request.xhr?
-        sql = "select * from fnRptSolutionsxAgents(#{params[:id]}, #{params[:mont].to_sqldate})"
+        sql = "select * from fnRptSolutionsxAgents(#{params[:id]}, #{params[:month].to_sqldate})"
         result = get_result(sql)
 
         render :json => result
@@ -58,7 +58,7 @@ class ReportController < ApplicationController
   end
   def time_solutions_agents
     if request.xhr?
-        sql = "select * from fnRptTimeSolutionsxAgents(#{params[:id]}, #{params[:from].to_sqldate}, #{params[:to].to_sqldate})"
+        sql = "select * from fnRptTimeSolutionsxAgents(#{params[:id]}, '#{params[:from].to_sqldate}', '#{params[:to].to_sqldate}')"
         result = get_result(sql)
 
         render :json => result

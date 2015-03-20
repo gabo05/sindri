@@ -8,10 +8,11 @@
 			<% for area in @areas %>
 				<li class="list-group-item">
 					<label class="checkbox-inline">
-						<input type="checkbox" data-value="<%= area.id %>" class="check-item-area"><%= area.name %>
+						<input type="checkbox" data-value="<%= area.id %>" class="check-item-area">
+						<%= area.name %>
 					</label>
 				</li>
-			<% end %>
+			<%end%>
 		</ul>
 	</div>
 </fieldset>

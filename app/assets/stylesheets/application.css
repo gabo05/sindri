@@ -13,47 +13,32 @@
  *= require_self
  */
 /*Layout*/
-header{
-	height: 110px;
-    padding-top: 1%;
-    padding-bottom: 1%;
+.sindri-image{
+    max-height: 40px;
 }
-header img{
-    max-height: 75px;
+.form-inline{
+	margin-bottom: 12px;
 }
-header h1, header img{
-	float: left;
+.dropdown-toggle.logo{
+	margin-left: 0;
+	margin-top: 0;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
 }
-.sindri-business-name{
-    color: #000;
+.table > thead > tr > td{
+	font-weight: bold;
 }
-.sindri-business-name:hover{
-    text-decoration: none;
-}
-.sindri-user > li > a{
-	font-size: 1.5em;
-	margin-top: 10px;
-    color: #2E2E2E;
-}
-.center{
-    float: none;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.table  tr > td > img{
+	max-width: 40px;
 }
 .picture-field{
-    width: 0;
-    height: 0;
+	height: 0;
+	width: 0;
 }
 #preview-picture{
-    max-width: 130px;
+	max-width: 100px;
 }
-.table thead tr td{
-    font-weight: bold;
-}
-.table tr td img{
-    max-width: 50px;
-}
-#tickets-home .panel{
-    height: 220px !important;
+.separated{
+	margin-bottom: 15px;
 }

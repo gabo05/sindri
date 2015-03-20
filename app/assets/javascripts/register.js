@@ -1,3 +1,4 @@
+var strongRegex = new RegExp("^(?=.{6,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\W).*$", "g");
 var initialize = function(){
 	$(document).on('submit','#register-form', function(e){
 		e.preventDefault();
@@ -24,7 +25,40 @@ var initialize = function(){
 			showValidationMessage(conpass, 'Las contraseñas no coinciden');
 			return;
 		}
+		if(pass.val().length < 6){
+			showValidationMessage(pass, 'Las contraseña debe tener una longitud mayor o igual a 6 caracteres');
+			return;
+		}
+			
+		if(strongRegex.test(pass.val())){
+			showValidationMessage(conpass, 'Las contraseña es muy débil. Debe incluir mayúsculas, minúsculas, números y caracteres especiales');
+			return;
+		}
 
+		this.submit();
+	});
+
+	$(document).on('submit', '#chpass', function(e){
+		e.preventDefault();
+
+
+		pass = $('#newpass');
+		conpass = $('#confirm_password');
+
+		if(pass.val() != conpass.val()){
+			conpass.val('');
+			showValidationMessage(conpass, 'Las contraseñas no coinciden');
+			return;
+		}
+		if(pass.val().length < 6){
+			showValidationMessage(conpass, 'Las contraseña debe tener una longitud mayor o igual a 6 caracteres');
+			return;
+		}
+			
+		if(strongRegex.test(pass.val().value)){
+			showValidationMessage(conpass, 'Las contraseña es muy débil. Debe incluir mayúsculas, minúsculas, números y caracteres especiales');
+			return;
+		}
 		this.submit();
 	});
 }

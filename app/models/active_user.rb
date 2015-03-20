@@ -7,6 +7,7 @@ class ActiveUser
 		attr_reader :id
 		attr_reader :type
 		attr_reader :full_name
+		attr_reader :picture
 		attr_reader :user_id
 		attr_reader :business_id
 		attr_reader :business_name
@@ -18,6 +19,7 @@ class ActiveUser
 			@type = user.type
 			@full_name = user.full_name
 			@user_id = user.id
+			@picture = user.picture
 			if(business != nil)
 				self.business_id = business.id
 				self.business_name = business.name

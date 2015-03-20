@@ -1,44 +1,54 @@
-<%= render :partial => "shared/message" %>
-<%= form_tag  url_for(:controller => :agent, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form' do %>
-    <fieldset>
-        <legend>Editar Perfil</legend>
-        <div class="form-group">
-            <label for="picture" class="col-sm-2 control-label">Foto</label>
-            <div class="col-sm-10">
-                <%= image_tag "/uploads/#{@account.picture}", id: 'preview-picture', 'data-file' => 'picture'%>
-                <%= file_field_tag 'picture', class: 'picture-field'%>
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Editar Agente
+            </header>
+            <div class="panel-body">
+                <%= render :partial => "shared/message" %>
+                <%= form_tag  url_for(:controller => :agent, :action => :save), method: 'post', multipart: true, class: 'form-horizontal', role: 'form', id:'agent_form' do %>
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="picture" class="col-sm-2 control-label">Foto</label>
+                            <div class="col-sm-10">
+                                <%= image_tag "/uploads/#{@account.picture}", id: 'preview-picture', 'data-file' => 'picture'%>
+                                <%= file_field_tag 'picture', class: 'picture-field'%>
+                            </div>
+                        </div>
+                		<div class="form-group">
+                            <label for="first_name" class="col-sm-2 control-label">Nombre</label>
+                            <div class="col-sm-10">
+                                <%= text_field_tag 'first_name', @agent.first_name, class: 'form-control', placeholder: 'Nombre' %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name" class="col-sm-2 control-label">Apellido</label>
+                            <div class="col-sm-10">
+                                <%= text_field_tag 'last_name', @agent.last_name, class: 'form-control', placeholder: 'Apellido' %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="first_name" class="col-sm-2 control-label">Correo</label>
+                            <div class="col-sm-10">
+                                <%= email_field_tag 'email', @email.email, class: 'form-control', placeholder: 'Correo Electrónico' %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Cargo</label>
+                            <div class="col-sm-10">
+                                <%= select "agent", "appointment_id", @appointments.collect{ |p| [p.name, p.id] }, {}, {:class => 'form-control'} %>
+                            </div>
+                        </div>
+                        
+                        <div id="hidden_fields">
+                            <%= hidden_field_tag 'agent_id', @agent.id %>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <%= submit_tag 'Guardar', class: 'btn btn-primary'%>
+                        </div>
+                    </fieldset>
+                <% end %>
             </div>
-        </div>
-		<div class="form-group">
-            <label for="first_name" class="col-sm-2 control-label">Nombre</label>
-            <div class="col-sm-10">
-                <%= text_field_tag 'first_name', @agent.first_name, class: 'form-control', placeholder: 'Nombre' %>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="first_name" class="col-sm-2 control-label">Apellido</label>
-            <div class="col-sm-10">
-                <%= text_field_tag 'last_name', @agent.last_name, class: 'form-control', placeholder: 'Apellido' %>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="first_name" class="col-sm-2 control-label">Correo</label>
-            <div class="col-sm-10">
-                <%= email_field_tag 'email', @email.email, class: 'form-control', placeholder: 'Correo Electrónico' %>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password" class="col-sm-2 control-label">Cargo</label>
-            <div class="col-sm-10">
-                <%= select "agent", "appointment_id", @appointments.collect{ |p| [p.name, p.id] }, {}, {:class => 'form-control'} %>
-            </div>
-        </div>
-        
-        <div id="hidden_fields">
-            <%= hidden_field_tag 'agent_id', @agent.id %>
-        </div>
-        <div class="btn-group pull-right">
-            <%= submit_tag 'Guardar', class: 'btn btn-primary'%>
-        </div>
-    </fieldset>
-<% end %>
+        </section>
+    </div>
+</div>

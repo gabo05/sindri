@@ -14,7 +14,8 @@ function showPopover(input, message){
 	input.focus()
 		.popover({
 			html: true,
-			content: message
+			content: message,
+			container: 'body'
 		});
 }
 function applyInputStyle(input, class_name){

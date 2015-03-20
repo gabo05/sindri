@@ -2,159 +2,223 @@
 <html>
 	<head>
         <title>Sindri - Helpdesk</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <%= favicon_link_tag 'favicon.png' %>
         <%= stylesheet_link_tag    "lib/bootstrap.min", :media => "all" %>
-        <%= stylesheet_link_tag    "lib/bootstrap-theme.min", :media => "all" %>
+        <%= stylesheet_link_tag    "lib/jquery-ui.custom", :media => "all" %>
+        <%= stylesheet_link_tag    "template/bootstrap-reset", :media => "all" %>
+        <%= stylesheet_link_tag    "font/css/font-awesome", :media => "all" %>
+        <%= stylesheet_link_tag    "template/calendar", :media => "all" %>
+        <%= stylesheet_link_tag    "template/style", :media => "all" %>
+        <%= stylesheet_link_tag    "template/style-responsive", :media => "all" %>
+        <%= stylesheet_link_tag    "template/blue-theme", :media => "all" %>
+        <%= stylesheet_link_tag    "template/table-responsive", :media => "all" %>
         <%= stylesheet_link_tag    "lib/bootstrap-datetimepicker.min", :media => "all" %>
         <%= stylesheet_link_tag    "lib/jquery.steps", :media => "all" %>
         <%= stylesheet_link_tag    "lib/jquery.minicolors", :media => "all" %>
-        <%= stylesheet_link_tag    "lib/soueidan-sidenav", :media => "all" %>
+        <%= stylesheet_link_tag    "lib/icheck-blue", :media => "all" %>
         <%= stylesheet_link_tag    "application", :media => "all" %>
         <%= render :partial => "styles" %>
         <%= csrf_meta_tags %>
 	</head>
 	<body>
-		<!-- <div class="container"> -->
-			<header>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <% if @user.business_logo != nil %>
-						<%= image_tag "/logos/#{@user.business_logo}", :alt => @user.business_name, :title => @user.business_name%>
-                        <% end %>
-						<h1>
-                            <% if @user.type == 'client' %>
-                                <%= @user.business_name %>
-                            <% elsif @user.type == 'agent' and @businesses != nil %>
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle sindri-business-name" type="button" id="business-name" data-toggle="dropdown" aria-expanded="true">
-                                        <%= @user.business_name %>
-                                        <% if @businesses.count() > 0 %>
-                                            <span class="caret"></span>
-                                        <% end %>
-                                    </a>
-                                    <%if @businesses.count() > 0%>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="business-name">
-                                        <% for business in @businesses %>
-                                            <li role="presentation"><%= link_to business.name, controller: "home", action: "index", id: business.id %></li>
-                                        <% end %>
-                                    </ul>
-                                    <% end %>
-                                </div>
+    <section id="container">
+        <!--header start-->
+        <header class="header fixed-top clearfix">
+        <!--logo start-->
+        <div class="brand">
+
+            <a href="index.html" class="logo">
+                <% if @user.business_logo != nil %>
+                    <%= image_tag "/logos/#{@user.business_logo}", :alt => @user.business_name, :title => @user.business_name, :class=>'sindri-image'%>
+                <% end %>
+                <% if @user.type == 'client' %>
+                    <%= @user.business_name %>
+                <% elsif @user.type == 'agent' and @businesses != nil %>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle logo" type="button" id="business-name" data-toggle="dropdown" aria-expanded="true">
+                            <%= @user.business_name %>
+                            <% if @businesses.count() > 0 %>
+                                <span class="caret"></span>
                             <% end %>
-                        </h1>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<nav class="navbar pull-right" role="navigation">
-                            <div class="container-fluid">
-                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                    <ul class="nav navbar-nav sindri-user">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                                <i class="glyphicon glyphicon-user"></i>
-                                                <%= @user.full_name %> 
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li>
-                                                    <%= link_to raw("<i class='glyphicon glyphicon-user'></i>Perfil"), controller: @user.type, action: "edit", id: @user.id %>
-                                                </li>
-                                                <li><a href="#"><i class="glyphicon glyphicon-pencil"></i>Cambiar Contrase&ntilde;a</a></li>
-                                                <li class="divider"></li>
-                                                <li>
-                                                    <%= link_to raw("<i class='glyphicon glyphicon-off'></i>Cerrar Sesión"), controller: "account", action: "logout" %>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-					</div>
-				</div>
-			</header>
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <nav class="soueidan-nav-container">
-                    <ul class="soueidan-nav">
-                        <li class="">
-                            <a href="<%= url_for controller: "home", action: "index" %>">
-                                <span class="icon-home"></span>
-                                <span class="soueidan-text">Inicio</span>
+                        </a>
+                        <%if @businesses.count() > 0%>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="business-name">
+                            <% for business in @businesses %>
+                                <li role="presentation"><%= link_to business.name, controller: "home", action: "index", id: business.id %></li>
+                            <% end %>
+                        </ul>
+                        <% end %>
+                    </div>
+                <% end %>
+            </a>
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars"></div>
+            </div>
+        </div>
+        <!--logo end-->
+        <div class="top-nav clearfix">
+            <!--search & user info start-->
+            <ul class="nav pull-right top-menu">
+                <!-- <li>
+                    <input type="text" class="form-control search" placeholder=" Search">
+                </li> -->
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <!-- <img alt="" src="images/avatar1_small.jpg"> -->
+                        <%= image_tag "/uploads/#{@user.picture}", :alt => @user.business_name, :title => @user.business_name, :class=>''%>
+                        <span class="username"><%= @user.full_name %></span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <li>
+                            <%= link_to raw("<i class='fa fa-suitcase'></i>Perfil"), controller: @user.type, action: "edit", id: @user.id %>
+                        </li>
+                        <li>
+                            <%= link_to raw("<i class='fa fa-cog'></i>Cambiar Contraseña"), controller: "account", action: "acchpassword"%>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <%= link_to raw("<i class='fa fa-key'></i>Cerrar Sesión"), controller: "account", action: "logout" %>
+                        </li>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+                <li>
+                    <div class="toggle-right-box">
+                        <div class="fa fa-bars"></div>
+                    </div>
+                </li>
+            </ul>
+            <!--search & user info end-->
+        </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse">
+                <!-- sidebar menu start-->
+                <div class="leftside-navigation">
+                    <ul class="sidebar-menu" id="nav-accordion">
+                        <li>
+                            <a class="active" href="<%= url_for controller: "home", action: "index" %>">
+                                <i class="fa fa-home"></i>
+                                <span>Inicio</span>
                             </a>
                         </li>
                         <li>
                             <a href="<%= url_for controller: "ticket", action: "index" %>">
-                                <span class="icon-user"></span>
-                                <span class="soueidan-text">Tickets</span>
+                                <i class="fa fa-ticket"></i>
+                                <span>Tickets</span>
                             </a>
                         </li>
                         <% if @user.is_in_role? 'agent' or @user.is_in_role? 'admin' %>
                         <li>
                             <a href="<%= url_for controller: "schedule", action: "index" %>">
-                                <span class="icon-picture"></span>
-                                <span class="soueidan-text">Planificaci&oacute;n</span>    
+                                <i class="fa fa-calendar"></i>
+                                <span>Planificaci&oacute;n</span>    
                             </a>
                         </li>
                         <% end %>
                         <% if @user.is_in_role? 'admin' %>
                             <li>
                                 <a href="<%= url_for controller: "agent", action: "index" %>">
-                                    <span class="icon-facetime-video"></span>
-                                    <span class="soueidan-text">Agentes</span>
+                                    <i class="fa fa-user-md"></i>
+                                    <span>Agentes</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="<%= url_for controller: "client", action: "index" %>">
-                                    <span class="icon-facetime-video"></span>
-                                    <span class="soueidan-text">Clientes</span>
+                                    <i class="fa fa-user"></i>
+                                    <span>Clientes</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="<%= url_for controller: "business", action: "index" %>">
-                                    <span class="icon-facetime-video"></span>
-                                    <span class="soueidan-text">Organizaciones</span>
+                                    <i class="fa fa-sitemap"></i>
+                                    <span>Organizaciones</span>
                                 </a>
                             </li>
                         <% end %>
                         <% if @user.is_in_role? 'agent' or @user.is_in_role? 'admin' or @user.is_in_role? 'ticket_admin' %>
                             <li>
                                 <a href="<%= url_for controller: "solution", action: "index" %>">
-                                    <span class="icon-facetime-video"></span>
-                                    <span class="soueidan-text">Soluciones</span>
+                                    <i class="fa fa-book"></i>
+                                    <span>Soluciones</span>
                                 </a>
                             </li>
                         <% end %>
-                        <li>
-                            <a href="<%= url_for controller: "report", action: "index" %>">
-                                <span class="icon-facetime-video"></span>
-                                <span class="soueidan-text">Reportes</span>
+                        <li class="sub-menu">
+                            <a href="javascript:;">
+                                <i class="fa fa-table"></i>
+                                <span>Reportes</span>
                             </a>
+                            <ul class="sub">
+                                <li>
+                                    <a href="<%= url_for controller: 'report', action: 'tickets_agents' %>">Tickets por Agente</a>
+                                </li>
+                                <li>
+                                    <a href="<%= url_for controller: 'report', action: 'tickets_clients' %>">Tickets por Cliente</a>
+                                </li>
+                                <li>
+                                    <a href="<%= url_for controller: 'report', action: 'tickets_states' %>">Tickets por Estado</a>
+                                </li>
+                                <li>
+                                    <a href="<%= url_for controller: 'report', action: 'tickets_categories' %>">Tickets por Categoria</a>
+                                </li>
+                                <li>
+                                    <a href="<%= url_for controller: 'report', action: 'solutions_agents' %>">Soluciones por agente</a>
+                                </li>
+                                <li>
+                                    <a href="<%= url_for controller: 'report', action: 'time_solutions_agents' %>">Tiempo de resoluci&oacute;n de Tickets</a>
+                                </li>
+                            </ul>
                         </li>
                         <% if @user.is_in_role? 'admin' %>
-                            <li>
-                                <a href="<%= url_for controller: "setting", action: "index" %>">
-                                    <span class="icon-facetime-video"></span>
-                                    <span class="soueidan-text">Administraci&oacute;n</span>
+                            <li class="sub-menu">
+                                <a href="javascript:;">
+                                    <i class="fa fa-tag"></i>
+                                    <span>Catalogos</span>
                                 </a>
+                                <ul class="sub">
+                                    <li><a href="<%= url_for controller: "catalog", action: "states", page: 1 %>">Estados</a></li>
+                                    <li><a href="<%= url_for controller: "catalog", action: "categories", page: 1 %>">Categorias</a></li>
+                                    <li><a href="<%= url_for controller: "catalog", action: "areas", page: 1 %>">Areas</a></li>
+                                    <li><a href="<%= url_for controller: "catalog", action: "states", page: 1 %>">Cargos</a></li>
+                                </ul>
                             </li>
                         <% end %>
                         <li>
-                            <a href="<%= url_for controller: "setting", action: "index" %>">
-                                <span class="icon-facetime-video"></span>
-                                <span class="soueidan-text">Acerca de...</span>
+                            <a href="http://wwww.sindri.com" target="blank">
+                                <i class="fa fa-info"></i>
+                                <span>Acerca de...</span>
                             </a>
                         </li>
                     </ul>
-                </nav>
+                </div>
+                <!-- sidebar menu end-->
             </div>
-            <section class="col-lg-8 col-md-8 col-sm-8 col-xs-9 ">
-			    <%= yield %>
+        </aside>
+        <section id="main-content">
+            <section class="wrapper">
+                <%= yield %>
             </section>
+        </section>
+    </section>
 		<!-- </div> -->
         <%= javascript_include_tag "lib/jquery.min" %>
+        <%= javascript_include_tag "lib/jquery-ui.custom.min" %>
 		<%= javascript_include_tag "lib/bootstrap.min" %>
+        <%= javascript_include_tag "lib/jquery.accordion" %>
+        <%= javascript_include_tag "lib/jquery.nicescroll" %>
         <%= javascript_include_tag "lib/moment.min" %>
+        <!-- <%= javascript_include_tag "lib/dashboard" %> -->
+        <%= javascript_include_tag "lib/jquery.cselect.min" %>
+        <%= javascript_include_tag "lib/scripts" %>
         <%= javascript_include_tag "lib/bootstrap-datetimepicker.min" %>
         <%= javascript_include_tag "lib/jquery.minicolors.min" %>
+        <%= javascript_include_tag "lib/jquery.icheck.min" %>
         <%= javascript_include_tag "form.ajax" %>
         <%= javascript_include_tag "common" %>
 		<%= javascript_include_tag "application" %>

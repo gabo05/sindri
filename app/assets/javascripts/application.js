@@ -12,13 +12,27 @@
 //
 $(document).on('ready', function(){
 	//Initialize jQuery Datepicker
-	$('.date').datetimepicker({
+    $('.date').datetimepicker({
         format: 'DD/MM/YYYY'
+    });
+    $('.date-month').datetimepicker({
+        viewMode: 'months',
+        format: 'MM'
     });
     //Initialize jQuery Minicolors
 	$('.minicolors-input').minicolors({
 		position: 'bottom right'
 	});
+	$('.minimal-blue input').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+        radioClass: 'iradio_minimal-blue',
+        increaseArea: '20%' // optional
+    });
+    $('.square-blue input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+    });
 	if(typeof initialize === 'function')
     	initialize();
 });

@@ -48,6 +48,15 @@ module AccountHelper
             return { 'message' => 'noemail' }
         end
 	end
+    def user_chpass(user, password)
+        account = Account.where('id = ?', user.user_id).first
+
+        account.passsword = Digest::MD5.hexdigest password
+        
+        account.confirmed = 1
+
+        account.save
+    end
     def user_logout()
         session[:user] = nil;
         session[:businesses] = nil;
@@ -74,12 +83,9 @@ module AccountHelper
     end
     def user_confirm(user_id)
         user = Account.find_by id: user_id
-        user.confirmed = 1
-        user.save
-
-        email = Email.where('id = ? and state = (1)::bit(1)', user.email_id).first
-
+        
         activeUser = active_user(user)
+        
         return { 'message' => 'success', 'data' => activeUser }
     end
 end

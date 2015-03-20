@@ -25,7 +25,11 @@ class Business < ActiveRecord::Base
 		
 		query = "select * from fnGetBusinessAdministrator(#{id})"
 		
-		agent = Agent.connection.execute(query, :skip_logging)
+		result = ActiveRecord::Base.connection.exec_query(query)
+
+		agent_id = result.rows[0][0]
+		
+		agent = Agent.where('id = ?', agent_id).first
 
 		return agent
 	end

@@ -31,6 +31,12 @@ module ApplicationHelper
 
 		content_tag(:div, content, class: 'input-group date', id: "dtp_#{name}")
 	end
+	def month_picker_tag(name, value)
+		content = text_field_tag name, value, class: 'form-control'
+		content << content_tag(:span, content_tag(:span, nil, class: 'glyphicon glyphicon-calendar'), class: 'input-group-addon')
+
+		content_tag(:div, content, class: 'input-group date-month', id: "dtp_#{name}")
+	end
 	def color_label_tag(color, text = nil)
 		text ||= color
 		content_tag(:span, text, class: 'label', style: "background-color: #{color}")

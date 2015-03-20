@@ -138,15 +138,23 @@ Rails.application.routes.draw do
 
   get "report/solutions/interval/:id", to: "report#time_solutions_agents"
 
+  get "report/graphic/solutions/interval/:id", to: "report#graphic_time_solutions_agents"
+
   get "report/tickets/agent", to: "report#tickets_agents"
 
   get "report/tickets/client", to: "report#tickets_clients"
 
   get "report/tickets/category", to: "report#tickets_categories"
 
+  get "report/graphic/tickets/category", to: "report#graphic_tickets_categories"
+
   get "report/tickets/state", to: "report#tickets_states"
 
+  get "report/graphic/tickets/state", to: "report#graphic_tickets_states"
+
   get "report/solutions/agents", to: "report#solutions_agents"
+
+  get "report/graphic/solutions/agents/", to: "report#graphic_solutions_agents"
 
   get "report/solutions/interval", to: "report#time_solutions_agents"
 

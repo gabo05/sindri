@@ -15,7 +15,8 @@ function showPopover(input, message){
 		.popover({
 			html: true,
 			content: message,
-			container: 'body'
+			container: 'body',
+			placement: 'top'
 		});
 }
 function applyInputStyle(input, class_name){

@@ -61,6 +61,8 @@ Rails.application.config.assets.precompile += %w( lib/jquery.nicescroll.js )
 Rails.application.config.assets.precompile += %w( lib/dashboard.js )
 Rails.application.config.assets.precompile += %w( lib/jquery.cselect.min.js )
 Rails.application.config.assets.precompile += %w( lib/jquery.icheck.min.js )
+Rails.application.config.assets.precompile += %w( lib/highcharts.js )
+Rails.application.config.assets.precompile += %w( lib/exporting.js )
 Rails.application.config.assets.precompile += %w( lib/scripts.js )
 #Controllers Scripts
 Rails.application.config.assets.precompile += %w( form.ajax.js )

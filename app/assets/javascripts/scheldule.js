@@ -104,3 +104,22 @@ var parseDate = function (value) {
 var getFormatDate = function(date){
     return date.getDate() +"/"+ (date.getMonth()+1)+"/"+date.getYear()
 }
+
+var validate = function(){
+    var name = $('#name');
+    var start = $('#start_date');
+    var end = $('#end_date');
+    if(isEmpty(name)){
+        showValidationMessage(name,'El campo Nombre es requerido');
+        return false;
+    }
+    if(isEmpty(start)){
+        showValidationMessage(start,'El campo Inicia es requerido');
+        return false;
+    }
+    if(isEmpty(end)){
+        showValidationMessage(end,'El campo Inicia es requerido');
+        return false;
+    }
+    return true;
+}
